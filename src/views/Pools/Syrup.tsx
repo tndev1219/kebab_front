@@ -11,6 +11,7 @@ import useI18n from 'hooks/useI18n'
 import useBlock from 'hooks/useBlock'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useFarms, usePools } from 'state/hooks'
+import BurnButton from 'components/BurnButton'
 // import { QuoteToken, PoolCategory } from 'config/constants/types'
 import Coming from './components/Coming'
 import PoolCard from './components/PoolCard'
@@ -88,7 +89,7 @@ const Farm: React.FC = () => {
             <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
           </ul>
         </div>
-        <img src="/images/syrup.png" alt="SYRUP POOL icon" />
+        <BurnButton/>
       </Hero>
       <PoolTabButtons />
       <Divider />
