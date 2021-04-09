@@ -13,6 +13,7 @@ import { QuoteToken } from 'config/constants/types'
 
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
+  liquidity?: BigNumber
 }
 
 const Action = styled.div`

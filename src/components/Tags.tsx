@@ -49,4 +49,10 @@ const Defcon5 = () => (
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, Defcon1, Defcon2, Defcon3, Defcon4, Defcon5 }
+const DualTag = (props) => (
+  <Tag variant="textSubtle" outline {...props}>
+    Dual
+  </Tag>
+)
+
+export { CoreTag, CommunityTag, BinanceTag, Defcon1, Defcon2, Defcon3, Defcon4, Defcon5, DualTag }
