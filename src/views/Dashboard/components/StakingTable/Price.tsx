@@ -41,7 +41,7 @@ const Price: React.FC<PriceProps> = ({
   return <Container>
     {stakedBalance ? (
       <>
-        <SupplyWrapper>${getBalanceNumber(stakedBalance.multipliedBy(price)).toLocaleString()}</SupplyWrapper>
+        <SupplyWrapper>${getBalanceNumber(stakedBalance.multipliedBy(price).dividedBy(2)).toLocaleString()}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>

@@ -43,7 +43,7 @@ const Total: React.FC<TotalProps> = ({
   return <Container>
     {stakedBalance ? (
       <>
-        <SupplyWrapper>{(getBalanceNumber(stakedBalance.multipliedBy(price)) * earned + getBalanceNumber(stakedBalance.multipliedBy(kebabPrice))).toFixed(8)}</SupplyWrapper>
+        <SupplyWrapper>${(getBalanceNumber(stakedBalance.multipliedBy(kebabPrice)) + getBalanceNumber(price.multipliedBy(new BigNumber(earned)))).toFixed(8)}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>

@@ -44,7 +44,7 @@ const MyDollarValue: React.FC<MyDollarValueProps> = ({
   return <Container>
     {symbol ? (
       <>
-        <SupplyWrapper>{(getBalanceNumber(stakedBalance) * price).toFixed(8)}</SupplyWrapper>
+        <SupplyWrapper>${(getBalanceNumber(stakedBalance) * price).toFixed(8)}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>

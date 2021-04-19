@@ -21,14 +21,9 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Profile',
+    label: 'Dashboard',
     icon: 'InfoIcon',
-    items: [
-      {
-        label: 'Dashboard',
-        href: '/dashboard',
-      },
-    ],
+    href: '/dashboard'
   },
   {
     label: 'Farming',

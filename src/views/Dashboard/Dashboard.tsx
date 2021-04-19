@@ -84,13 +84,6 @@ const Dashboard: React.FC = () => {
     const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
 
     const row: RowProps = {
-      apr: {
-        value: farm.apy && farm.apy.toNumber().toLocaleString('en-US', { maximumFractionDigits: 2 }),
-        multiplier: farm.multiplier,
-        lpLabel,
-        cakePrice,
-        originalValue: farm.apy && farm.apy.toNumber(),
-      },
       farm: {
         image: farm.lpSymbol.split(' ')[0].toLocaleLowerCase(),
         label: lpLabel,
@@ -102,9 +95,6 @@ const Dashboard: React.FC = () => {
       },
       liquidity: {
         liquidity: Number(farm.liquidity),
-      },
-      multiplier: {
-        multiplier: farm.multiplier,
       },
       details: farm,
     }
@@ -151,12 +141,6 @@ const Dashboard: React.FC = () => {
         switch (column.name) {
           case 'farm':
             return b.id - a.id
-          case 'apr':
-            if (a.original.apr.value && b.original.apr.value) {
-              return Number(a.original.apr.value) - Number(b.original.apr.value)
-            }
-
-            return 0
           case 'earned':
             return a.original.earned.earnings - b.original.earned.earnings
           default:
