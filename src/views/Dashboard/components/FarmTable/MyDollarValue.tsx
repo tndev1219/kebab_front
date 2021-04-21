@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
 import useI18n from 'hooks/useI18n'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useFarmFromSymbol, useFarmUser } from 'state/hooks'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { setFarmsTotalData } from 'state/dashboard'
 
 export interface MyDollarValueProps {
   symbol: string
@@ -36,15 +38,21 @@ const MyDollarValue: React.FC<MyDollarValueProps> = ({
   symbol,
   price
 }) => {
+  const dispatch = useDispatch()
   const TranslateString = useI18n()
   const { account } = useWallet()
   const { pid } = useFarmFromSymbol(symbol)
   const { stakedBalance } = useFarmUser(pid, account)
+  const value = getBalanceNumber(stakedBalance) * price
+
+  useEffect(() => {
+    dispatch(setFarmsTotalData({pid, value}))
+  }, [dispatch, pid, value])
 
   return <Container>
     {symbol ? (
       <>
-        <SupplyWrapper>${(getBalanceNumber(stakedBalance) * price).toFixed(8)}</SupplyWrapper>
+        <SupplyWrapper>${value.toFixed(8)}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>

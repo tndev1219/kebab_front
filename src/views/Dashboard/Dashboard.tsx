@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { RowType } from 'kebabfinance-uikit'
+import { RowType, Card, CardBody } from 'kebabfinance-uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 
@@ -18,6 +18,7 @@ import { DesktopColumnSchema, StakingPoolColumnSchema } from './components/types
 
 import StakingTable from './components/StakingTable/StakingTable'
 import { StakingRowProps } from './components/StakingTable/Row'
+import GrandTotal from './components/GrandTotal'
 
 const Container = styled.div`
   padding: 10px 40px;
@@ -175,6 +176,9 @@ const Dashboard: React.FC = () => {
   return (
     <Page>
       <Container>
+        <Card>
+          <CardBody><GrandTotal/></CardBody>
+        </Card>
         <Pool>
           {renderFarmingPool()}
         </Pool>

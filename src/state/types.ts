@@ -38,6 +38,20 @@ export interface PoolsState {
   data: Pool[]
 }
 
+export interface FarmTotal {
+  pid: number
+  value: number
+}
+
+export interface PoolTotal {
+  symbol: string
+  value: number
+}
+
+export interface DashboardState {
+  farms: FarmTotal[]
+  pools: PoolTotal[]
+}
 export interface PriceList {
   [key: string]: number
 }
@@ -59,5 +73,6 @@ export interface PriceState {
 export interface State {
   farms: FarmsState
   pools: PoolsState,
-  prices: PriceState
+  prices: PriceState,
+  dashboard: DashboardState,
 }

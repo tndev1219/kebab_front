@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
 import useI18n from 'hooks/useI18n'
 import BigNumber from 'bignumber.js'
 import { usePriceBusd, usePriceCakeBusd } from 'state/hooks'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { setPoolsTotalData } from 'state/dashboard'
 
 export interface TotalProps {
   symbol: string
@@ -36,14 +38,20 @@ const SupplyWrapper = styled.div`
 const Total: React.FC<TotalProps> = ({
   symbol, stakedBalance, earned
 }) => {
+  const dispatch = useDispatch()
   const TranslateString = useI18n()
   const price = usePriceBusd(symbol)
   const kebabPrice = usePriceCakeBusd()
+  const value = getBalanceNumber(stakedBalance.multipliedBy(kebabPrice)) + getBalanceNumber(price.multipliedBy(new BigNumber(earned)))
+
+  useEffect(() => {
+    dispatch(setPoolsTotalData({symbol, value}))
+  }, [dispatch, symbol, value])
 
   return <Container>
     {stakedBalance ? (
       <>
-        <SupplyWrapper>${(getBalanceNumber(stakedBalance.multipliedBy(kebabPrice)) + getBalanceNumber(price.multipliedBy(new BigNumber(earned)))).toFixed(8)}</SupplyWrapper>
+        <SupplyWrapper>${(value).toFixed(8)}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
