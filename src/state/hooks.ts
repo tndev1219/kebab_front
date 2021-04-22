@@ -8,7 +8,8 @@ import {
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
 } from './actions'
-import { State, Farm, Pool } from './types'
+import { State, Farm, Pool, PriceState } from './types'
+import { fetchPrices } from './prices'
 
 const ZERO = new BigNumber(0)
 
@@ -78,6 +79,20 @@ export const usePoolFromPid = (sousId): Pool => {
 }
 
 // Prices
+export const useFetchPriceList = () => {
+  const { slowRefresh } = useRefresh()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPrices())
+  }, [dispatch, slowRefresh])
+}
+
+export const useGetApiPrices = () => {
+  const prices: PriceState['data'] = useSelector((state: State) => state.prices.data)
+  return prices
+}
+
 export const usePriceBnbBusd = (): BigNumber => {
   const pid = 2 // BUSD-BNB LP
   const farm = useFarmFromPid(pid)
@@ -94,4 +109,17 @@ export const usePriceBtcbBusd = (): BigNumber => {
   const pid = 4 // BTCB-BUSD LP
   const farm = useFarmFromPid(pid)
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
+}
+
+export const usePriceBusd = (symbol: string): BigNumber => {
+  const farm = useFarmFromSymbol(symbol)
+  return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
+}
+
+export const useDashboard = () => {
+  const farmsTotal = useSelector((state: State) => state.dashboard.farms)
+  const poolsTotal = useSelector((state: State) => state.dashboard.pools)
+  const total = (farmsTotal.reduce((t, obj) => obj.value + t, 0)) + (poolsTotal.reduce((t, obj) => obj.value + t, 0))
+
+  return total
 }

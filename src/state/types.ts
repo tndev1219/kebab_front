@@ -38,9 +38,41 @@ export interface PoolsState {
   data: Pool[]
 }
 
+export interface FarmTotal {
+  pid: number
+  value: number
+}
+
+export interface PoolTotal {
+  symbol: string
+  value: number
+}
+
+export interface DashboardState {
+  farms: FarmTotal[]
+  pools: PoolTotal[]
+}
+export interface PriceList {
+  [key: string]: number
+}
+
+export interface PriceApiResponse {
+  /* eslint-disable camelcase */
+  update_at: string
+  prices: PriceList
+}
+
+export interface PriceState {
+  isLoading: boolean
+  lastUpdated: string
+  data: PriceList
+}
+
 // Global state
 
 export interface State {
   farms: FarmsState
-  pools: PoolsState
+  pools: PoolsState,
+  prices: PriceState,
+  dashboard: DashboardState,
 }

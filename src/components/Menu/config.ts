@@ -21,6 +21,11 @@ const config: MenuEntry[] = [
     ],
   },
   {
+    label: 'Dashboard',
+    icon: 'InfoIcon',
+    href: '/dashboard'
+  },
+  {
     label: 'Farming',
     icon: 'FarmIcon',
     href: '/farms',

@@ -1,141 +1,190 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Text } from 'kebabfinance-uikit'
-import useI18n from 'hooks/useI18n'
-import Page from 'components/layout/Page'
-import Container from 'components/layout/Container'
-import { useFarms, usePriceCakeBusd } from 'state/hooks'
-import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
+import React, { useCallback } from 'react'
 import BigNumber from 'bignumber.js'
+import { RowType, Card, CardBody } from 'kebabfinance-uikit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import styled from 'styled-components'
 
-const Hero = styled.div`
-  align-items: center;
-  background-image: url('/images/pan-bg-mobile.svg');
-  background-repeat: no-repeat;
-  background-position: top center;
-  display: flex;
-  justify-content: center;
-  margin: 32px auto;
-  max-width: 904px;
-  padding-top: 128px;
-  text-align: center;
+import { BLOCKS_PER_YEAR } from 'config'
+import Page from 'components/layout/Page'
+import { useFarms, usePriceCakeBusd, useGetApiPrices, usePools } from 'state/hooks'
+import { Farm } from 'state/types'
+import useBlock from 'hooks/useBlock'
+import { getBalanceNumber } from 'utils/formatBalance'
+import { getFarmApy } from 'utils/apy'
+import { FarmWithStakedValue } from 'views/Farms/components/FarmCard'
+import Table from './components/FarmTable/FarmTable'
+import { RowProps } from './components/FarmTable/Row'
+import { DesktopColumnSchema, StakingPoolColumnSchema } from './components/types'
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/pan-bg2.svg'), url('/images/pan-bg.svg');
-    background-position: left center, right center;
-    height: 165px;
-    margin-top: 48px;
-    padding-top: 0;
-  }
+import StakingTable from './components/StakingTable/StakingTable'
+import { StakingRowProps } from './components/StakingTable/Row'
+import GrandTotal from './components/GrandTotal'
+
+const Container = styled.div`
+  padding: 10px 40px;
 `
 
-const Title = styled(Heading)`
-  color: ${({ theme }) => theme.colors.secondary};
-  font-size: 40px;
-  margin-bottom: ${({ theme }) => theme.spacing[4]}px;
-`
-
-const Subtitle = styled(Text)`
-  font-weight: 400;
+const Pool = styled.div`
+  padding: 20px 0;
 `
 
 const Dashboard: React.FC = () => {
-  const TranslateString = useI18n()
-  const farms = useFarms()
-  const farmsWithBalance = useFarmsWithBalance()
-  const kebabPrice = usePriceCakeBusd()
+  const { account } = useWallet()
+  const farmsLP = useFarms()
+  const pools = usePools(account)
+  const cakePrice = usePriceCakeBusd()
+  const prices = useGetApiPrices()
+  const block = useBlock()
 
-  const rows = []
-  for (let i = 0; i < farmsWithBalance.length; i++) {
-    const elem = {
-      harvestable: farmsWithBalance[i].balance,
-      tokenSymbol: farmsWithBalance[i].tokenSymbol,
-      quoteTokenSymbol: farmsWithBalance[i].quoteTokenSymbol,
-      lpSymbol: farmsWithBalance[i].lpSymbol,
-      tokenAmount: farms[i].tokenAmount,
-      quoteTokenAmount: farms[i].quoteTokenAmount,
-      tokenPriceVsQuote: farms[i].tokenPriceVsQuote,
-      lpSupply: farms[i].lpSupply,
-      share: null,
-      balanceBase: null,
-      balanceQuote: null,
-      balanceLP: null,
-      tvl: null,
-      harvestDisp: null
+  const poolsWithApy = pools.map((pool) => {
+    const stakingTokenFarm = farmsLP.find((s) => s.lpSymbol === 'KEBAB-BUSD LP')
+
+    const stakingTokenPrice = new BigNumber(stakingTokenFarm?.tokenPriceVsQuote)
+    let rewardTokenPrice = stakingTokenPrice
+    if (pool.tokenName === 'BTCB') {
+      rewardTokenPrice = new BigNumber(farmsLP.find((f) => f.tokenSymbol === pool.tokenName).tokenPriceVsQuote)
+    } else if (pool.tokenName === 'BNB') {
+      rewardTokenPrice = new BigNumber(farmsLP.find((f) => f.tokenSymbol === pool.tokenName).tokenPriceVsQuote)
     }
-    if (elem.tokenSymbol !== 'KETCH') {
-      elem.share = elem.harvestable.div(new BigNumber(elem.lpSupply)).toNumber()
-      elem.balanceBase = new BigNumber(elem.tokenAmount).times(elem.share).toNumber()
-      elem.balanceQuote = new BigNumber(elem.quoteTokenAmount).times(elem.share).toNumber()
-      elem.share *= 100
-      elem.harvestDisp = elem.harvestable.toNumber()/(10**18)
-      elem.tvl = elem.balanceQuote*2
-      if (elem.quoteTokenSymbol !== 'BUSD') {
-        elem.tvl = kebabPrice.times(elem.balanceBase*2).toNumber()
+    
+    const totalRewardPricePerYear = rewardTokenPrice.times(pool.tokenPerBlock).times(BLOCKS_PER_YEAR)
+    const totalStakingTokenInPool = stakingTokenPrice.times(getBalanceNumber(pool.totalStaked))
+    const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+
+    return {
+      ...pool,
+      isFinished: pool.sousId === 0 ? false : pool.isFinished || block > pool.endBlock,
+      apy,
+    }
+  })
+
+  const farmList = farmsLP.filter((farm) => farm.pid !== 0)
+
+  const farmsList = useCallback(
+    (farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
+      const farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
+        if (!farm.lpTotalInQuoteToken || !prices) {
+          return farm
+        }
+
+        const quoteTokenPriceUsd = prices[farm.quoteTokenSymbol.toLowerCase()]
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        const apy = getFarmApy(farm.poolWeight, cakePrice, totalLiquidity)
+
+        return { ...farm, apy, liquidity: totalLiquidity }
+      })
+
+      return farmsToDisplayWithAPY
+    },
+    [cakePrice, prices],
+  )
+
+  const farmsStaked = farmsList(farmList)
+
+  const rowData = farmsStaked.map((farm) => {
+    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
+
+    const row: RowProps = {
+      farm: {
+        image: farm.lpSymbol.split(' ')[0].toLocaleLowerCase(),
+        label: lpLabel,
+        pid: farm.pid,
+      },
+      earned: {
+        earnings: farm.userData ? getBalanceNumber(new BigNumber(farm.userData.earnings)) : null,
+        pid: farm.pid,
+      },
+      liquidity: {
+        liquidity: Number(farm.liquidity),
+      },
+      details: farm,
+    }
+
+    return row
+  })
+
+  const poolList = poolsWithApy.filter((pool) => pool.isActive)
+  const stakingPools = poolList.map((pool) => {
+    const lpSymbol = `${pool.tokenName}-BUSD LP`
+    const row: StakingRowProps = {
+      staking: {
+        image: pool.tokenName,
+        label: pool.tokenName
+      },
+      stake: {
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
+      },
+      harvest: {
+        earned: getBalanceNumber(new BigNumber(pool?.userData?.pendingReward || 0), pool.tokenDecimals)
+      },
+      price: {
+        symbol: lpSymbol,
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
+      },
+      total: {
+        earned: getBalanceNumber(new BigNumber(pool?.userData?.pendingReward || 0), pool.tokenDecimals),
+        symbol: lpSymbol,
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
       }
-      rows.push(elem)
     }
+
+    return row
+  })
+
+  const renderFarmingPool = (): JSX.Element => {
+    const columnSchema = DesktopColumnSchema
+
+    const columns = columnSchema.map((column) => ({
+      id: column.id,
+      name: column.name,
+      label: column.label,
+      sort: (a: RowType<RowProps>, b: RowType<RowProps>) => {
+        switch (column.name) {
+          case 'farm':
+            return b.id - a.id
+          case 'earned':
+            return a.original.earned.earnings - b.original.earned.earnings
+          default:
+            return 1
+        }
+      },
+      sortable: column.sortable,
+    }))
+
+    return <Table data={rowData} columns={columns} />
   }
 
-  const Table = styled.table`
+  const renderStakingPool = (): JSX.Element => {
+    const columnSchema = StakingPoolColumnSchema
 
-  `
-  const Th = styled.th`
-    border: 1px solid black;
-  `
+    const columns = columnSchema.map((column) => ({
+      id: column.id,
+      name: column.name,
+      label: column.label,
+      sort: () => {
+        switch (column.name) {
+          default:
+            return 1
+        }
+      },
+      sortable: column.sortable,
+    }))
 
-  const Td = styled.td`
-    border: 1px solid black;
-  `
+    return <StakingTable data={stakingPools} columns={columns} />
+  }
 
   return (
     <Page>
-      <Hero>
-        <div>
-          <Title as="h1">{TranslateString(576, 'BSC Dashboard')}</Title>
-          <Subtitle>{TranslateString(578, 'Available for the Binance Smart Chain only')}</Subtitle>
-        </div>
-      </Hero>
       <Container>
-        <Table>
-          <thead>
-            <tr>
-              <Th>LP Token</Th>
-              <Th>Avail. Liquidities</Th>
-              <Th>Harvestable KEBABs</Th>
-              <Th>Total Value</Th>
-            </tr>
-          </thead>
-          <tbody>
-          {rows.map((row) => {
-            return ( <tr>
-              <Td>
-                ??? {row.lpSymbol}
-                <br />
-                {row.share}%
-              </Td>
-              <Td>
-                {row.balanceBase} {row.tokenSymbol}
-                <br />
-                {row.balanceQuote} {row.quoteTokenSymbol}
-              </Td>
-              <Td>
-                {row.harvestDisp} KEBAB
-              </Td>
-              <Td>
-                {row.tvl}
-                <br />
-                {row.earning}
-              </Td>
-            </tr>) 
-          })}
-          </tbody>
-          <tfoot>
-            <tr>
-              <Td>YYY</Td>
-            </tr>
-          </tfoot>
-        </Table>
+        <Card>
+          <CardBody><GrandTotal/></CardBody>
+        </Card>
+        <Pool>
+          {renderFarmingPool()}
+        </Pool>
+        <Pool>
+          {renderStakingPool()}
+        </Pool>
       </Container>
     </Page>
   )
