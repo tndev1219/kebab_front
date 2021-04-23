@@ -47,7 +47,7 @@ const Launch = () => {
         <Blurb>{TranslateString(502, 'Launch your project with KebapSwap, Binance Smart Chain’s most-used AMM project and liquidity provider, to bring your token directly to the most active and rapidly growing community on BSC.')}</Blurb>
         <Button
           as="a"
-          href="https://docs.google.com/forms/d/1ZB34WWXFqsfGRcRsehXBc3m7MM_O5mBwDXuki_SR2lE/viewform"
+          href="https://docs.google.com/forms/d/1uerVBpniyl60iaPy-NFWcJ7fZsZ8kIvqPxaiaZt_BJM/edit"
           target="_blank"
           rel="noopener noreferrer"
         >
