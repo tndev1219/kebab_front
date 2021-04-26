@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { BLOCKS_PER_YEAR } from 'config'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceCakeBusd, useGetApiPrices, usePools } from 'state/hooks'
+import { useFarms, usePriceCakeBusd, usePools } from 'state/hooks'
 import { Farm } from 'state/types'
 import useBlock from 'hooks/useBlock'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -33,7 +33,6 @@ const Dashboard: React.FC = () => {
   const farmsLP = useFarms()
   const pools = usePools(account)
   const cakePrice = usePriceCakeBusd()
-  const prices = useGetApiPrices()
   const block = useBlock()
 
   const poolsWithApy = pools.map((pool) => {
@@ -63,11 +62,17 @@ const Dashboard: React.FC = () => {
   const farmsList = useCallback(
     (farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
       const farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        if (!farm.lpTotalInQuoteToken || !prices) {
+        if (!farm.lpTotalInQuoteToken) {
           return farm
         }
 
-        const quoteTokenPriceUsd = prices[farm.quoteTokenSymbol.toLowerCase()]
+        let quoteTokenPriceUsd = new BigNumber(1)
+        if (farm.quoteTokenSymbol === 'BTCB') {
+          quoteTokenPriceUsd = new BigNumber(farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote)
+        } else if (farm.quoteTokenSymbol === 'BNB') {
+          quoteTokenPriceUsd = new BigNumber(farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote)
+        }
+
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
         const apy = getFarmApy(farm.poolWeight, cakePrice, totalLiquidity)
 
@@ -76,7 +81,7 @@ const Dashboard: React.FC = () => {
 
       return farmsToDisplayWithAPY
     },
-    [cakePrice, prices],
+    [cakePrice, farmsLP],
   )
 
   const farmsStaked = farmsList(farmList)

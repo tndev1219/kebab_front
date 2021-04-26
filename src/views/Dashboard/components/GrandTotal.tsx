@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import useI18n from 'hooks/useI18n'
 import { useDashboard } from 'state/hooks'
+import { getDisplayBalanceUsd } from 'utils/formatBalance'
+import BigNumber from 'bignumber.js'
+import { isNumber } from 'lodash'
 
 const Container = styled.div`
   display: flex;
@@ -29,18 +32,18 @@ const SupplyWrapper = styled.div`
 
 const GrandTotal: React.FC = () => {
   const TranslateString = useI18n()
-  const total = useDashboard()
+  const total = getDisplayBalanceUsd(new BigNumber(useDashboard()))
 
-  return total !== 0 ? <Container>
+  return isNumber(total) ? <Container>
     {total ? (
       <>
-        <SupplyWrapper>Grand Total: ${total.toFixed(6)}</SupplyWrapper>
+        <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
     )}
   </Container> :<Container>
-    <SupplyWrapper>Grand Total: ${total}</SupplyWrapper>
+    <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
   </Container>
 }
 

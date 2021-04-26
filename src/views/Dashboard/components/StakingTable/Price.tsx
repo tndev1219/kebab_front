@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useI18n from 'hooks/useI18n'
 import BigNumber from 'bignumber.js'
 import { usePriceBusd } from 'state/hooks'
-import { getBalanceNumber } from 'utils/formatBalance'
+import { getDisplayBalanceUsd } from 'utils/formatBalance'
 
 export interface PriceProps {
   symbol: string
@@ -37,11 +37,12 @@ const Price: React.FC<PriceProps> = ({
 }) => {
   const TranslateString = useI18n()
   const price = usePriceBusd(symbol)
+  const value = getDisplayBalanceUsd(price)
 
   return <Container>
     {stakedBalance ? (
       <>
-        <SupplyWrapper>${getBalanceNumber(stakedBalance.multipliedBy(price).dividedBy(2)).toLocaleString()}</SupplyWrapper>
+        <SupplyWrapper>{value}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>

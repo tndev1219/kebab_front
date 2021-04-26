@@ -4,14 +4,15 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ResetCSS } from 'kebabfinance-uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
-import GlobalStyle from './style/Global'
-import Menu from './components/Menu'
+import Ifos from 'views/Ifos'
 import Farms from './views/Farms'
 import Farm from './views/Farm'
 import Home from './views/Home'
 import Pools from './views/Pools'
 import Dashboard from './views/Dashboard'
 import NotFound from './views/NotFound'
+import Menu from './components/Menu'
+import GlobalStyle from './style/Global'
 // import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
 BigNumber.config({
@@ -50,6 +51,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/ifo">
+            <Ifos />
           </Route>
           {/* Redirect */}
           <Route path="/staking">

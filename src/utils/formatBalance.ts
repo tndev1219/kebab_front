@@ -8,3 +8,11 @@ export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {
 export const getFullDisplayBalance = (balance: BigNumber, decimals = 18) => {
   return balance.dividedBy(new BigNumber(10).pow(decimals)).toFixed()
 }
+
+export const getDisplayBalanceUsd = (balance: BigNumber) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+  return formatter.format(balance.toNumber())
+}

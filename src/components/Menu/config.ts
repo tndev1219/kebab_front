@@ -36,6 +36,11 @@ const config: MenuEntry[] = [
     href: '/syrup',
   },
   {
+    label: 'IFO',
+    icon: 'IfoIcon',
+    href: '/ifo',
+  },
+  {
     label: 'Info',
     icon: 'InfoIcon',
     items: [
@@ -57,11 +62,6 @@ const config: MenuEntry[] = [
       },
     ],
   },
-  // {
-  //   label: 'IFO',
-  //   icon: 'IfoIcon',
-  //   href: '/ifo',
-  // },
   {
     label: 'More',
     icon: 'MoreIcon',

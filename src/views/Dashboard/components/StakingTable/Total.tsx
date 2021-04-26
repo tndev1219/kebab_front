@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import useI18n from 'hooks/useI18n'
 import BigNumber from 'bignumber.js'
 import { usePriceBusd, usePriceCakeBusd } from 'state/hooks'
-import { getBalanceNumber } from 'utils/formatBalance'
+import { getBalanceNumber, getDisplayBalanceUsd } from 'utils/formatBalance'
 import { setPoolsTotalData } from 'state/dashboard'
 
 export interface TotalProps {
@@ -42,7 +42,8 @@ const Total: React.FC<TotalProps> = ({
   const TranslateString = useI18n()
   const price = usePriceBusd(symbol)
   const kebabPrice = usePriceCakeBusd()
-  const value = getBalanceNumber(stakedBalance.multipliedBy(kebabPrice)) + getBalanceNumber(price.multipliedBy(new BigNumber(earned)))
+  const value = getBalanceNumber(stakedBalance.multipliedBy(kebabPrice).plus(price.multipliedBy(new BigNumber(earned))))
+  const displayValue = getDisplayBalanceUsd(new BigNumber(value))
 
   useEffect(() => {
     dispatch(setPoolsTotalData({symbol, value}))
@@ -51,7 +52,7 @@ const Total: React.FC<TotalProps> = ({
   return <Container>
     {stakedBalance ? (
       <>
-        <SupplyWrapper>${(value).toFixed(8)}</SupplyWrapper>
+        <SupplyWrapper>{displayValue}</SupplyWrapper>
       </>
     ) : (
       <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
