@@ -9872,10 +9872,10 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-kebabfinance-uikit@^0.8.16:
-  version "0.8.16"
-  resolved "https://registry.yarnpkg.com/kebabfinance-uikit/-/kebabfinance-uikit-0.8.16.tgz#79caffa590174059a1610c580f644c6b205cfc8e"
-  integrity sha512-KN+sNaixXKR4+GBlTi8HCu6IVWvBZyHg5A+5vi2/+DcNKsxJb9f9IqL6pV68/dKDyCts8zkCDiiJse1yJ5E+mA==
+kebabfinance-uikit@^0.8.17:
+  version "0.8.17"
+  resolved "https://registry.yarnpkg.com/kebabfinance-uikit/-/kebabfinance-uikit-0.8.17.tgz#2cfc6902a018c2845174317bba5d7a91e050bbc5"
+  integrity sha512-/t+sWR4/dZrTyOdxXK0U5X5sprfVcv+n6+V4OEtZHazHRiIdbs7XuFKWzmM4oqYyS76z+EfGuzr5/K6gyO7Adw==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"

@@ -22,7 +22,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Dashboard',
-    icon: 'InfoIcon',
+    icon: 'DashboardIcon',
     href: '/dashboard'
   },
   {
