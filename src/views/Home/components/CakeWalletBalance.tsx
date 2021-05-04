@@ -8,10 +8,10 @@ import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import CardValue from 'components/Card/CardValue'
 
-const Label = styled(Text)<{ account?: string | null }>`
+const Label = styled(Text)`
   font-family: 'GilroySemiBold';
-  color: ${({ account, theme }) => (account ? 'white' : theme.colors.textDisabled)};
-  font-size: ${({ account }) => (account ? '32px' : '16px')};
+  color: ${({ theme }) => theme.colors.textDisabled};
+  font-size: 16px;
 `
 
 const CakeWalletBalance = () => {
@@ -23,7 +23,7 @@ const CakeWalletBalance = () => {
     return <Label>{TranslateString(298, 'Locked')}</Label>
   }
 
-  return <CardValue value={getBalanceNumber(cakeBalance)} fontSize="24px" />
+  return <CardValue value={getBalanceNumber(cakeBalance)} fontSize="32px" />
 }
 
 export default CakeWalletBalance

@@ -7,10 +7,10 @@ import useI18n from 'hooks/useI18n'
 import useAllEarnings from 'hooks/useAllEarnings'
 import CardValue from 'components/Card/CardValue'
 
-const Label = styled(Text)<{ account?: string | null }>`
+const Label = styled(Text)`
   font-family: 'GilroySemiBold';
-  color: ${({ account, theme }) => (account ? 'white' : theme.colors.textDisabled)};
-  font-size: ${({ account }) => (account ? '32px' : '16px')};
+  color: ${({ theme }) => theme.colors.textDisabled};
+  font-size: 16px;
 `
 
 const CakeHarvestBalance = () => {
@@ -25,7 +25,7 @@ const CakeHarvestBalance = () => {
     return <Label>{TranslateString(298, 'Locked')}</Label>
   }
 
-  return <CardValue value={earningsSum} />
+  return <CardValue value={earningsSum} fontSize="32px" />
 }
 
 export default CakeHarvestBalance

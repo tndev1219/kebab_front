@@ -78,14 +78,14 @@ const FarmedStakingCard = () => {
       <CardBody>
         <CardTitle>{TranslateString(542, 'Farms & Staking')}</CardTitle>
         <Blocks>
-          <Block>
-            <Label>{TranslateString(544, 'KEBAB to Harvest')}</Label>
+          <Block account={account}>
+            <Label account={account}>{TranslateString(544, 'KEBAB to Harvest')}</Label>
             <Value>
               <CakeHarvestBalance />
             </Value>
           </Block>
-          <Block>
-            <Label>{TranslateString(546, 'KEBAB in Wallet')}</Label>
+          <Block account={account}>
+            <Label account={account}>{TranslateString(546, 'KEBAB in Wallet')}</Label>
             <Value>
               <CakeWalletBalance />
             </Value>
