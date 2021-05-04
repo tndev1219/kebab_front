@@ -29,20 +29,20 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const LPSupply: React.FC<LPSupplyProps> = ({
-  value
-}) => {
+const LPSupply: React.FC<LPSupplyProps> = ({ value }) => {
   const TranslateString = useI18n()
 
-  return <Container>
-    {value ? (
-      <>
-        <SupplyWrapper>{new BigNumber(value).dividedBy((new BigNumber(10)).pow(18)).toFixed(2)}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {value ? (
+        <>
+          <SupplyWrapper>{new BigNumber(value).dividedBy(new BigNumber(10).pow(18)).toFixed(2)}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default LPSupply

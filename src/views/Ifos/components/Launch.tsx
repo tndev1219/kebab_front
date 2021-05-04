@@ -4,13 +4,13 @@ import { Heading, Text, Button } from 'kebabfinance-uikit'
 import useI18n from 'hooks/useI18n'
 
 const Title = styled(Heading).attrs({ as: 'h1', size: 'xl' })`
-  color: #E46149;
+  color: #e46149;
   font-size: 32px;
   margin-bottom: 16px;
 `
 
 const Blurb = styled(Text)`
-  color: #23001E;
+  color: #23001e;
   font-size: 16px;
   line-height: 19px;
   margin-bottom: 16px;
@@ -28,8 +28,7 @@ const StyledLaunch = styled.div`
   }
 `
 
-const Image = styled.img`
-`
+const Image = styled.img``
 
 const RightText = styled.div`
   text-align: right;
@@ -44,7 +43,12 @@ const Launch = () => {
       <Image src="/images/ifos/ifo-launch.png" alt="ifo launch" />
       <RightText>
         <Title>{TranslateString(500, 'Want to launch your own IFO?')}</Title>
-        <Blurb>{TranslateString(502, 'Launch your project with KebapSwap, Binance Smart Chain’s most-used AMM project and liquidity provider, to bring your token directly to the most active and rapidly growing community on BSC.')}</Blurb>
+        <Blurb>
+          {TranslateString(
+            502,
+            'Launch your project with KebapSwap, Binance Smart Chain’s most-used AMM project and liquidity provider, to bring your token directly to the most active and rapidly growing community on BSC.',
+          )}
+        </Blurb>
         <Button
           as="a"
           href="https://docs.google.com/forms/d/1uerVBpniyl60iaPy-NFWcJ7fZsZ8kIvqPxaiaZt_BJM/edit"

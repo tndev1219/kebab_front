@@ -31,23 +31,23 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const MyLP: React.FC<MyLPProps> = ({
-  symbol
-}) => {
+const MyLP: React.FC<MyLPProps> = ({ symbol }) => {
   const TranslateString = useI18n()
   const { account } = useWallet()
   const { pid } = useFarmFromSymbol(symbol)
   const { stakedBalance } = useFarmUser(pid, account)
 
-  return <Container>
-    {symbol ? (
-      <>
-        <SupplyWrapper>{getBalanceNumber(stakedBalance)}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {symbol ? (
+        <>
+          <SupplyWrapper>{getBalanceNumber(stakedBalance)}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default MyLP

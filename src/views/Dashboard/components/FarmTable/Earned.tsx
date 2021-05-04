@@ -17,7 +17,7 @@ const Earned: React.FunctionComponent<EarnedProps> = ({ earnings }) => {
   const { account } = useWallet()
   const amountEarned = account ? earnings : null
 
-  const displayBalance = (amountEarned || amountEarned === 0) ? amountEarned.toLocaleString() : '?'
+  const displayBalance = amountEarned || amountEarned === 0 ? amountEarned.toLocaleString() : '?'
   return <Amount earned={amountEarned}>{displayBalance}</Amount>
 }
 

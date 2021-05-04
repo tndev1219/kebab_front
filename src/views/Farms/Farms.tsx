@@ -72,7 +72,7 @@ const Farms: React.FC = () => {
   return (
     <Page>
       <Title>{TranslateString(999, 'Stake LP tokens to earn KEBAB')}</Title>
-      <StyledLink exact activeClassName="active" to="/staking">
+      <StyledLink exact activeClassName="active" to="/pools">
         Staking
       </StyledLink>
       <FarmTabButtons />

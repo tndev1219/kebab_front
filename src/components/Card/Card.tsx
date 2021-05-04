@@ -7,7 +7,7 @@ const StyledCard = styled.div`
   background: ${(props) => props.theme.card.background};
   border-radius: 20px;
   display: flex;
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.primary};
   flex: 1;
   box-shadow: 0px 2px 8px rgba(171, 133, 115, 0.21);
   border-radius: 20px;

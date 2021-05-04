@@ -10,14 +10,13 @@ import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
 
 const StyledFarmStakingCard = styled(Card)`
-  background-image: url('/images/cake-bg.svg');
+  background-image: url('/images/kebab_logo.svg');
   background-repeat: no-repeat;
-  background-position: top right;
-  background-size: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 344px;
+  background-position: 90% 10%;
+  background-size: 25%;
+  background-color: ${({ theme }) => theme.colors.cardBackground1};
   width: 100%;
+  height: 534px;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     margin: 0;
@@ -25,27 +24,33 @@ const StyledFarmStakingCard = styled(Card)`
   }
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
-  margin-bottom: 24px;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-top: 14px;
 `
-const Block = styled.div`
+const Blocks = styled.div`
+  position: relative;
+  top: 140px;
+`
+const Block = styled.div<{ account?: string | null }>`
+  display: flex;
+  flex-direction: ${(props) => (!props.account ? 'column' : 'column-reverse')};
   margin-bottom: 16px;
 `
-
+const Label = styled.div<{ account?: string | null }>`
+  font-family: 'GilroySemiBold';
+  font-size: ${(props) => (!props.account ? '20px' : '16px')};
+  color: ${({ account, theme }) => (!account ? 'white' : theme.colors.textDisabled)};
+  margin-bottom: 12px;
+`
 const Value = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `
-
-const CardImage = styled.img`
-  margin-bottom: 16px;
-`
-
-const Label = styled.div`
-  color: ${({ theme }) => theme.colors.textSubtle};
-  font-size: 14px;
-`
-
 const Actions = styled.div`
-  margin-top: 24px;
+  position: absolute;
+  bottom: 24px;
+  width: calc(100% - 48px);
 `
 
 const FarmedStakingCard = () => {
@@ -72,30 +77,32 @@ const FarmedStakingCard = () => {
     <StyledFarmStakingCard>
       <CardBody>
         <CardTitle>{TranslateString(542, 'Farms & Staking')}</CardTitle>
-        <CardImage src="/images/kebab.svg" alt="kebab logo" width="128" />
-        <Block>
-          <Value>
-            <CakeHarvestBalance />
-          </Value>
-          <Label>{TranslateString(544, 'KEBAB to Harvest')}</Label>
-        </Block>
-        <Block>
-          <Value>
-            <CakeWalletBalance />
-          </Value>
-          <Label>{TranslateString(546, 'KEBAB in Wallet')}</Label>
-        </Block>
+        <Blocks>
+          <Block>
+            <Label>{TranslateString(544, 'KEBAB to Harvest')}</Label>
+            <Value>
+              <CakeHarvestBalance />
+            </Value>
+          </Block>
+          <Block>
+            <Label>{TranslateString(546, 'KEBAB in Wallet')}</Label>
+            <Value>
+              <CakeWalletBalance />
+            </Value>
+          </Block>
+        </Blocks>
         <Actions>
           {account ? (
             <Button
               id="harvest-all"
+              variant="tertiary"
               disabled={balancesWithValue.length <= 0 || pendingTx}
               onClick={harvestAllFarms}
               fullWidth
             >
               {pendingTx
                 ? TranslateString(548, 'Collecting KEBAB')
-                : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+                : TranslateString(999, `Harvest All (${balancesWithValue.length})`)}
             </Button>
           ) : (
             <UnlockButton fullWidth />

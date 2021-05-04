@@ -4,7 +4,7 @@ import { Heading, Text } from 'kebabfinance-uikit'
 import useI18n from 'hooks/useI18n'
 
 const Title = styled(Heading).attrs({ as: 'h1', size: 'xl' })`
-  color: #FFF;
+  color: #fff;
   margin-bottom: 24px;
   font-weight: bold;
   font-size: 48px;

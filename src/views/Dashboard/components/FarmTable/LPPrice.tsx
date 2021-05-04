@@ -28,19 +28,19 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const LPPrice: React.FC<LPPriceProps> = ({
-  value
-}) => {
+const LPPrice: React.FC<LPPriceProps> = ({ value }) => {
   const TranslateString = useI18n()
-  return <Container>
-    {value ? (
-      <>
-        <SupplyWrapper>{value}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {value ? (
+        <>
+          <SupplyWrapper>{value}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default LPPrice

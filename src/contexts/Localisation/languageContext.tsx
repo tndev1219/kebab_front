@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { StringTranslations } from '@crowdin/crowdin-api-client'
 import { TranslationsContext } from 'contexts/Localisation/translationsContext'
 import { allLanguages, EN } from 'config/localisation/languageCodes'
-import axios from "axios"
+import axios from 'axios'
 
 const CACHE_KEY = 'pancakeSwapLanguage'
 
@@ -31,7 +31,6 @@ const LanguageContext = React.createContext({
 //   token: process.env.REACT_APP_CROWDIN_APIKEY,
 // })
 
-
 // const fetchTranslationsForSelectedLanguage = (selectedLanguage) => {
 //   return stringTranslationsApi.listLanguageTranslations(projectId, selectedLanguage.code, undefined, fileId, 200)
 // }
@@ -59,7 +58,8 @@ const LanguageContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (selectedLanguage) {
-      axios.get(`./lang/${selectedLanguage.code}.json`)
+      axios
+        .get(`./lang/${selectedLanguage.code}.json`)
         .then((translationApiResponse) => {
           if (translationApiResponse.data.length < 1) {
             setTranslations(['error'])

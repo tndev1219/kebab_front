@@ -12,7 +12,7 @@ export const getFullDisplayBalance = (balance: BigNumber, decimals = 18) => {
 export const getDisplayBalanceUsd = (balance: BigNumber) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
-  });
+    currency: 'USD',
+  })
   return formatter.format(balance.toNumber())
 }

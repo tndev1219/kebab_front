@@ -49,7 +49,7 @@ const Farm: React.FC = () => {
     } else if (pool.tokenName === 'BNB') {
       rewardTokenPrice = new BigNumber(farms.find((f) => f.tokenSymbol === pool.tokenName).tokenPriceVsQuote)
     }
-    
+
     const totalRewardPricePerYear = rewardTokenPrice.times(pool.tokenPerBlock).times(BLOCKS_PER_YEAR)
     const totalStakingTokenInPool = stakingTokenPrice.times(getBalanceNumber(pool.totalStaked))
     const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
