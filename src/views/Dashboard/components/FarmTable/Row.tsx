@@ -74,7 +74,10 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
   const { isXs } = useMatchBreakpoints()
 
   const handleRenderRow = () => {
-    const lpSupply = props.liquidity.liquidity ? (Number(props.liquidity.liquidity) / (new BigNumber(details.lpSupply).dividedBy((new BigNumber(10)).pow(18))).toNumber()) : 0
+    const lpSupply = props.liquidity.liquidity
+      ? Number(props.liquidity.liquidity) /
+        new BigNumber(details.lpSupply).dividedBy(new BigNumber(10).pow(18)).toNumber()
+      : 0
     if (!isXs) {
       return (
         <StyledTr onClick={toggleActionPanel}>
@@ -88,17 +91,17 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
               <Earned {...props.earned} />
             </CellLayout>
           </td>
-          <td key='lpSymbol'>
+          <td key="lpSymbol">
             <CellInner>
               <CellLayout label={TranslateString(1072, 'My LP')}>
-                <MyLP symbol={details.lpSymbol}/>
+                <MyLP symbol={details.lpSymbol} />
               </CellLayout>
             </CellInner>
           </td>
-          <td key='myDollarValue'>
+          <td key="myDollarValue">
             <CellInner>
               <CellLayout label={TranslateString(1072, 'My Dollar Value')}>
-                <MyDollarValue price={lpSupply} symbol={details.lpSymbol}/>
+                <MyDollarValue price={lpSupply} symbol={details.lpSymbol} />
               </CellLayout>
             </CellInner>
           </td>
@@ -143,33 +146,37 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
   }
 
   const handleSecondRenderRow = () => {
-    const lpSupply = (Number(props.liquidity.liquidity) / (new BigNumber(details.lpSupply).dividedBy((new BigNumber(10)).pow(18))).toNumber())
+    const lpSupply =
+      Number(props.liquidity.liquidity) /
+      new BigNumber(details.lpSupply).dividedBy(new BigNumber(10).pow(18)).toNumber()
     if (!isXs) {
       return (
         <StyledTr>
-          <td key='tokenAmount'>
-            <Tokens tokenAmount={details.tokenAmount} 
+          <td key="tokenAmount">
+            <Tokens
+              tokenAmount={details.tokenAmount}
               quoteTokenAmount={details.quoteTokenAmount}
               tokenSymbol={details.tokenSymbol}
               quoteTokenSymbol={details.quoteTokenSymbol}
-              tokenPriceVsQuote={details.tokenPriceVsQuote}/>
+              tokenPriceVsQuote={details.tokenPriceVsQuote}
+            />
           </td>
-          <td key='lpSupply'>
+          <td key="lpSupply">
             <CellInner>
               <CellLayout label={TranslateString(1072, 'LP Supply')}>
-                <LPSupply value={details.lpSupply}/>
+                <LPSupply value={details.lpSupply} />
               </CellLayout>
             </CellInner>
           </td>
-          <td key='lpPrice'>
+          <td key="lpPrice">
             <CellInner>
               <CellLayout label={TranslateString(1072, '1 LP Price')}>
-                <LPPrice value={lpSupply.toFixed(8)}/>
+                <LPPrice value={lpSupply.toFixed(8)} />
               </CellLayout>
             </CellInner>
           </td>
-          <td/>
-          <td/>
+          <td />
+          <td />
         </StyledTr>
       )
     }
@@ -178,19 +185,19 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
       <ValueContainer>
         <ValueWrapper>
           <Text>{TranslateString(1072, 'LP Supply')}</Text>
-          <LPSupply value={details.lpSupply}/>
+          <LPSupply value={details.lpSupply} />
         </ValueWrapper>
         <ValueWrapper>
           <Text>{TranslateString(1072, 'My LP')}</Text>
-          <MyLP symbol={details.lpSymbol}/>
+          <MyLP symbol={details.lpSymbol} />
         </ValueWrapper>
         <ValueWrapper>
           <Text>{TranslateString(1072, '1 LP Price')}</Text>
-          <LPPrice value={lpSupply.toFixed(8)}/>
+          <LPPrice value={lpSupply.toFixed(8)} />
         </ValueWrapper>
         <ValueWrapper>
           <Text>{TranslateString(1072, 'My Dollar Value')}</Text>
-          <MyDollarValue price={lpSupply} symbol={details.lpSymbol}/>
+          <MyDollarValue price={lpSupply} symbol={details.lpSymbol} />
         </ValueWrapper>
       </ValueContainer>
     )
@@ -199,9 +206,7 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
   return (
     <>
       {handleRenderRow()}
-      {actionPanelToggled && details && (
-        handleSecondRenderRow()
-      )}
+      {actionPanelToggled && details && handleSecondRenderRow()}
     </>
   )
 }

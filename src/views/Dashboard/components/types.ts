@@ -118,7 +118,7 @@ export const StakingPoolColumnSchema: ColumnsDefTypes[] = [
     translationId: 999,
     sortable: true,
     label: 'Total Value',
-  }
+  },
 ]
 
 export enum ViewMode {

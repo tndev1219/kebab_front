@@ -40,9 +40,11 @@ const SymbolWrapper = styled.span`
 `
 
 const Tokens: React.FC<TokenProps> = ({
-  tokenAmount, tokenSymbol,
-  quoteTokenAmount, quoteTokenSymbol,
-  tokenPriceVsQuote
+  tokenAmount,
+  tokenSymbol,
+  quoteTokenAmount,
+  quoteTokenSymbol,
+  tokenPriceVsQuote,
 }) => {
   const TranslateString = useI18n()
 
@@ -51,7 +53,7 @@ const Tokens: React.FC<TokenProps> = ({
       {tokenAmount ? (
         <TokenWrapper>
           <SymbolWrapper>Token {tokenSymbol}</SymbolWrapper>
-          <span>{(new BigNumber(tokenAmount)).toFixed(2)}</span>
+          <span>{new BigNumber(tokenAmount).toFixed(2)}</span>
         </TokenWrapper>
       ) : (
         <TokenWrapper>{TranslateString(656, 'Loading...')}</TokenWrapper>
@@ -59,15 +61,17 @@ const Tokens: React.FC<TokenProps> = ({
       {quoteTokenAmount ? (
         <TokenWrapper>
           <SymbolWrapper>Quote {quoteTokenSymbol}</SymbolWrapper>
-          <span>{(new BigNumber(quoteTokenAmount)).toFixed(2)}</span>
+          <span>{new BigNumber(quoteTokenAmount).toFixed(2)}</span>
         </TokenWrapper>
       ) : (
         <TokenWrapper>{TranslateString(656, 'Loading...')}</TokenWrapper>
       )}
       {tokenPriceVsQuote ? (
         <TokenWrapper>
-          <SymbolWrapper>{tokenSymbol} VS {quoteTokenSymbol}</SymbolWrapper>
-          <span>{(new BigNumber(tokenPriceVsQuote)).toFixed(6)}</span>
+          <SymbolWrapper>
+            {tokenSymbol} VS {quoteTokenSymbol}
+          </SymbolWrapper>
+          <span>{new BigNumber(tokenPriceVsQuote).toFixed(6)}</span>
         </TokenWrapper>
       ) : (
         <TokenWrapper>{TranslateString(656, 'Loading...')}</TokenWrapper>

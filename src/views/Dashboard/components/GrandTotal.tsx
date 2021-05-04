@@ -34,17 +34,21 @@ const GrandTotal: React.FC = () => {
   const TranslateString = useI18n()
   const total = getDisplayBalanceUsd(new BigNumber(useDashboard()))
 
-  return isNumber(total) ? <Container>
-    {total ? (
-      <>
-        <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container> :<Container>
-    <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
-  </Container>
+  return isNumber(total) ? (
+    <Container>
+      {total ? (
+        <>
+          <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  ) : (
+    <Container>
+      <SupplyWrapper>Grand Total: {total}</SupplyWrapper>
+    </Container>
+  )
 }
 
 export default GrandTotal

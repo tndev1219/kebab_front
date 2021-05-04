@@ -24,7 +24,7 @@ const cells = {
   stake: StakeBalance,
   harvest: Harvest,
   price: Price,
-  total: Total
+  total: Total,
 }
 
 const CellInner = styled.div`
@@ -80,7 +80,10 @@ const Row: React.FunctionComponent<StakingRowProps> = (props) => {
                   <td key={key}>
                     <CellInner>
                       <CellLayout
-                        label={TranslateString(StakingPoolColumnSchema[columnIndex].translationId, StakingPoolColumnSchema[columnIndex].label)}
+                        label={TranslateString(
+                          StakingPoolColumnSchema[columnIndex].translationId,
+                          StakingPoolColumnSchema[columnIndex].label,
+                        )}
                       >
                         {React.createElement(cells[key], props[key])}
                       </CellLayout>
@@ -103,11 +106,7 @@ const Row: React.FunctionComponent<StakingRowProps> = (props) => {
     )
   }
 
-  return (
-    <>
-      {handleRenderRow()}
-    </>
-  )
+  return <>{handleRenderRow()}</>
 }
 
 export default Row

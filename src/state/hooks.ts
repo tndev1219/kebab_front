@@ -119,7 +119,7 @@ export const usePriceBusd = (symbol: string): BigNumber => {
 export const useDashboard = () => {
   const farmsTotal = useSelector((state: State) => state.dashboard.farms)
   const poolsTotal = useSelector((state: State) => state.dashboard.pools)
-  const total = (farmsTotal.reduce((t, obj) => obj.value + t, 0)) + (poolsTotal.reduce((t, obj) => obj.value + t, 0))
+  const total = farmsTotal.reduce((t, obj) => obj.value + t, 0) + poolsTotal.reduce((t, obj) => obj.value + t, 0)
 
   return total
 }

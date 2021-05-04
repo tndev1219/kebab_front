@@ -35,10 +35,7 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const MyDollarValue: React.FC<MyDollarValueProps> = ({
-  symbol,
-  price
-}) => {
+const MyDollarValue: React.FC<MyDollarValueProps> = ({ symbol, price }) => {
   const dispatch = useDispatch()
   const TranslateString = useI18n()
   const { account } = useWallet()
@@ -48,18 +45,20 @@ const MyDollarValue: React.FC<MyDollarValueProps> = ({
   const displayValue = getDisplayBalanceUsd(new BigNumber(value))
 
   useEffect(() => {
-    dispatch(setFarmsTotalData({pid, value}))
+    dispatch(setFarmsTotalData({ pid, value }))
   }, [dispatch, pid, value])
 
-  return <Container>
-    {symbol ? (
-      <>
-        <SupplyWrapper>{displayValue}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {symbol ? (
+        <>
+          <SupplyWrapper>{displayValue}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default MyDollarValue

@@ -12,12 +12,11 @@ const Menu = (props) => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
   const { isDark, toggleTheme } = useTheme()
   const cakePriceUsd = usePriceCakeBusd()
-  if (!sessionStorage.lastprice)
-    sessionStorage.lastprice = cakePriceUsd.toNumber().toString()
+  if (!sessionStorage.lastprice) sessionStorage.lastprice = cakePriceUsd.toNumber().toString()
   if (sessionStorage.lastprice !== cakePriceUsd.toNumber().toString()) {
     setTimeout(() => {
       sessionStorage.lastprice = cakePriceUsd.toNumber().toString()
-    }, 1500);
+    }, 1500)
   }
   return (
     <UikitMenu

@@ -31,19 +31,19 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const StakeBalance: React.FC<StakeBalanceProps> = ({
-  stakedBalance
-}) => {
+const StakeBalance: React.FC<StakeBalanceProps> = ({ stakedBalance }) => {
   const TranslateString = useI18n()
-  return <Container>
-    {stakedBalance ? (
-      <>
-        <SupplyWrapper>{getBalanceNumber(stakedBalance).toFixed(0)}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {stakedBalance ? (
+        <>
+          <SupplyWrapper>{getBalanceNumber(stakedBalance).toFixed(0)}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default StakeBalance

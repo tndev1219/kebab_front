@@ -4,7 +4,7 @@ import { FarmConfig, QuoteToken } from './types'
 const farms: FarmConfig[] = [
   {
     pid: 0,
-    lpSymbol: 'KEBAB', 
+    lpSymbol: 'KEBAB',
     lpAddresses: {
       97: '0x52a4f96f1df18a48c77e311edfec59b4cdc92a0a',
       56: '0x7979F6C54ebA05E18Ded44C4F986F49a5De551c2',
@@ -117,7 +117,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '3X',
-    risk: 3
+    risk: 3,
   },
   {
     pid: 13,
@@ -134,7 +134,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '2X',
-    risk: 4
+    risk: 4,
   },
   {
     pid: 7,
@@ -151,7 +151,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '2X',
-    risk: 3
+    risk: 3,
   },
   {
     pid: 11,
@@ -168,7 +168,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '2X',
-    risk: 3
+    risk: 3,
   },
   {
     pid: 14,
@@ -185,7 +185,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 4
+    risk: 4,
   },
   {
     pid: 10,
@@ -202,7 +202,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 4
+    risk: 4,
   },
   {
     pid: 6,
@@ -219,7 +219,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 4
+    risk: 4,
   },
   {
     pid: 12,
@@ -236,7 +236,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 4
+    risk: 4,
   },
   {
     pid: 3,
@@ -253,7 +253,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 1
+    risk: 1,
   },
   {
     pid: 8,
@@ -270,7 +270,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 1
+    risk: 1,
   },
   {
     pid: 9,
@@ -287,7 +287,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
     multiplier: '1X',
-    risk: 1
+    risk: 1,
   },
   // {
   //   pid: 55,

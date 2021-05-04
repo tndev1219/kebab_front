@@ -32,22 +32,22 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const Price: React.FC<PriceProps> = ({
-  symbol, stakedBalance
-}) => {
+const Price: React.FC<PriceProps> = ({ symbol, stakedBalance }) => {
   const TranslateString = useI18n()
   const price = usePriceBusd(symbol)
   const value = getDisplayBalanceUsd(price)
 
-  return <Container>
-    {stakedBalance ? (
-      <>
-        <SupplyWrapper>{value}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {stakedBalance ? (
+        <>
+          <SupplyWrapper>{value}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default Price

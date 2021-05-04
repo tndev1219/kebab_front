@@ -8,8 +8,10 @@ import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import CardValue from 'components/Card/CardValue'
 
-const Label = styled(Text)`
-  color: ${({ theme }) => theme.colors.textDisabled};
+const Label = styled(Text)<{ account?: string | null }>`
+  font-family: 'GilroySemiBold';
+  color: ${({ account, theme }) => (account ? 'white' : theme.colors.textDisabled)};
+  font-size: ${({ account }) => (account ? '32px' : '16px')};
 `
 
 const CakeWalletBalance = () => {

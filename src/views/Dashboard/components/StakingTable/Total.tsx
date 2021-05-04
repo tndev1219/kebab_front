@@ -35,9 +35,7 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const Total: React.FC<TotalProps> = ({
-  symbol, stakedBalance, earned
-}) => {
+const Total: React.FC<TotalProps> = ({ symbol, stakedBalance, earned }) => {
   const dispatch = useDispatch()
   const TranslateString = useI18n()
   const price = usePriceBusd(symbol)
@@ -46,18 +44,20 @@ const Total: React.FC<TotalProps> = ({
   const displayValue = getDisplayBalanceUsd(new BigNumber(value))
 
   useEffect(() => {
-    dispatch(setPoolsTotalData({symbol, value}))
+    dispatch(setPoolsTotalData({ symbol, value }))
   }, [dispatch, symbol, value])
 
-  return <Container>
-    {stakedBalance ? (
-      <>
-        <SupplyWrapper>{displayValue}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container>
+  return (
+    <Container>
+      {stakedBalance ? (
+        <>
+          <SupplyWrapper>{displayValue}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  )
 }
 
 export default Total

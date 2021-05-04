@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
     } else if (pool.tokenName === 'BNB') {
       rewardTokenPrice = new BigNumber(farmsLP.find((f) => f.tokenSymbol === pool.tokenName).tokenPriceVsQuote)
     }
-    
+
     const totalRewardPricePerYear = rewardTokenPrice.times(pool.tokenPerBlock).times(BLOCKS_PER_YEAR)
     const totalStakingTokenInPool = stakingTokenPrice.times(getBalanceNumber(pool.totalStaked))
     const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
@@ -68,9 +68,13 @@ const Dashboard: React.FC = () => {
 
         let quoteTokenPriceUsd = new BigNumber(1)
         if (farm.quoteTokenSymbol === 'BTCB') {
-          quoteTokenPriceUsd = new BigNumber(farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote)
+          quoteTokenPriceUsd = new BigNumber(
+            farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote,
+          )
         } else if (farm.quoteTokenSymbol === 'BNB') {
-          quoteTokenPriceUsd = new BigNumber(farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote)
+          quoteTokenPriceUsd = new BigNumber(
+            farmsLP.find((f) => f.tokenSymbol === farm.quoteTokenSymbol).tokenPriceVsQuote,
+          )
         }
 
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
@@ -114,23 +118,23 @@ const Dashboard: React.FC = () => {
     const row: StakingRowProps = {
       staking: {
         image: pool.tokenName,
-        label: pool.tokenName
+        label: pool.tokenName,
       },
       stake: {
-        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0),
       },
       harvest: {
-        earned: getBalanceNumber(new BigNumber(pool?.userData?.pendingReward || 0), pool.tokenDecimals)
+        earned: getBalanceNumber(new BigNumber(pool?.userData?.pendingReward || 0), pool.tokenDecimals),
       },
       price: {
         symbol: lpSymbol,
-        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0),
       },
       total: {
         earned: getBalanceNumber(new BigNumber(pool?.userData?.pendingReward || 0), pool.tokenDecimals),
         symbol: lpSymbol,
-        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0)
-      }
+        stakedBalance: new BigNumber(pool?.userData?.stakedBalance || 0),
+      },
     }
 
     return row
@@ -182,14 +186,12 @@ const Dashboard: React.FC = () => {
     <Page>
       <Container>
         <Card>
-          <CardBody><GrandTotal/></CardBody>
+          <CardBody>
+            <GrandTotal />
+          </CardBody>
         </Card>
-        <Pool>
-          {renderFarmingPool()}
-        </Pool>
-        <Pool>
-          {renderStakingPool()}
-        </Pool>
+        <Pool>{renderFarmingPool()}</Pool>
+        <Pool>{renderStakingPool()}</Pool>
       </Container>
     </Page>
   )

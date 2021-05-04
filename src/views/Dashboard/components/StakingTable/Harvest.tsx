@@ -28,21 +28,23 @@ const SupplyWrapper = styled.div`
   text-align: left;
 `
 
-const Harvest: React.FC<HarvestProps> = ({
-  earned
-}) => {
+const Harvest: React.FC<HarvestProps> = ({ earned }) => {
   const TranslateString = useI18n()
-  return earned !== 0 ? <Container>
-    {earned ? (
-      <>
-        <SupplyWrapper>{earned.toFixed(6)}</SupplyWrapper>
-      </>
-    ) : (
-      <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
-    )}
-  </Container> :<Container>
-    <SupplyWrapper>{earned}</SupplyWrapper>
-  </Container>
+  return earned !== 0 ? (
+    <Container>
+      {earned ? (
+        <>
+          <SupplyWrapper>{earned.toFixed(6)}</SupplyWrapper>
+        </>
+      ) : (
+        <SupplyWrapper>{TranslateString(656, 'Loading...')}</SupplyWrapper>
+      )}
+    </Container>
+  ) : (
+    <Container>
+      <SupplyWrapper>{earned}</SupplyWrapper>
+    </Container>
+  )
 }
 
 export default Harvest

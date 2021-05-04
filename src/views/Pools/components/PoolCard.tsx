@@ -81,10 +81,8 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
 
   const convertedLimit = new BigNumber(stakingLimit).multipliedBy(new BigNumber(10).pow(tokenDecimals))
   let displayedDecimals = 3
-  if (tokenName === 'BTCB')
-    displayedDecimals = 8
-  if (tokenName === 'BNB')
-    displayedDecimals = 8
+  if (tokenName === 'BTCB') displayedDecimals = 8
+  if (tokenName === 'BNB') displayedDecimals = 8
 
   const [onPresentDeposit] = useModal(
     <DepositModal
@@ -142,7 +140,11 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
         </div>
         {!isOldSyrup ? (
           <BalanceAndCompound>
-            <Balance value={getBalanceNumber(earnings, tokenDecimals)} isDisabled={isFinished} decimals={displayedDecimals} />
+            <Balance
+              value={getBalanceNumber(earnings, tokenDecimals)}
+              isDisabled={isFinished}
+              decimals={displayedDecimals}
+            />
             {sousId === 0 && account && harvest && (
               <HarvestButton
                 disabled={!earnings.toNumber() || pendingTx}

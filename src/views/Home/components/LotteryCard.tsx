@@ -29,7 +29,8 @@ const FarmedStakingCard = () => {
       <CardBody>
         <CardTitle>{TranslateString(550, 'Kebab News')}</CardTitle>
         Jan 23: Timelock is in place. Staking APY corrected.
-        <br /><br />
+        <br />
+        <br />
         Jan 20: Welcome aboard everyone. KEBAB is now listed and actively trading. We stay at{' '}
         <strong>1 KEBAB / block</strong> by community decision. More farming pairs will be added in the coming weeks:
         vote on twitter.
