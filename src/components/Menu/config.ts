@@ -6,7 +6,7 @@ const config: MenuEntry[] = [
     icon: 'HomeIcon',
     href: '/',
     color: '#E46149',
-    backgroundColor: '#FAE0DC',
+    backgroundColor: '#FADFDB',
   },
   {
     label: 'Trade',
@@ -28,8 +28,8 @@ const config: MenuEntry[] = [
     label: 'Dashboard',
     icon: 'DashboardIcon',
     href: '/dashboard',
-    color: '#E46149',
-    backgroundColor: '#FAE0DC',
+    color: '#7A23BE',
+    backgroundColor: '#E4D3F2',
   },
   {
     label: 'Farming',
