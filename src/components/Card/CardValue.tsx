@@ -11,7 +11,7 @@ interface CardValueProps {
 
 const StyledCardValue = styled.div`
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary};
+  color: white;
 `
 
 const CardValue: React.FC<CardValueProps> = ({ value, decimals, fontSize = '40px' }) => {
