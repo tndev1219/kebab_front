@@ -9,7 +9,7 @@ import CardValue from 'components/Card/CardValue'
 
 const Label = styled(Text)`
   font-family: 'GilroySemiBold';
-  color: ${({ theme }) => theme.colors.textDisabled};
+  color: ${({ theme }) => theme.colors.textDsc};
   font-size: 16px;
 `
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
+import { ArrowDropDownIcon, ArrowDropUpIcon } from 'kebabfinance-uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
-import { ChevronDown, ChevronUp } from 'react-feather'
 import Balance from 'components/Balance'
 import { CommunityTag, CoreTag, BinanceTag } from 'components/Tags'
 import { PoolCategory } from 'config/constants/types'
@@ -18,17 +18,20 @@ interface Props {
   projectLink: string
   totalStaked: BigNumber
   blocksRemaining: number
-  isFinished: boolean
   blocksUntilStart: number
   poolCategory: PoolCategory
 }
 
-const StyledFooter = styled.div<{ isFinished: boolean }>`
+const StyledFooter = styled.div`
   border-top: 1px solid ${({ theme }) => (theme.isDark ? '#524B63' : '#E9EAEB')};
-  color: ${({ isFinished, theme }) => theme.colors[isFinished ? 'textDisabled2' : 'primary2']};
-  padding: 24px;
+  color: ${({ theme }) => theme.colors.secondary};
+  margin-top: 16px;
+  margin-left: -31px;
+  margin-right: -31px;
+  padding-top: 16px;
+  padding-left: 31px;
+  padding-right: 31px;
 `
-
 const StyledDetailsButton = styled.button`
   align-items: center;
   background-color: transparent;
@@ -45,77 +48,60 @@ const StyledDetailsButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
-
-  & > svg {
-    margin-left: 4px;
-  }
 `
-
 const Details = styled.div`
-  margin-top: 24px;
+  margin-top: 16px;
 `
-
 const Row = styled.div`
   align-items: center;
   display: flex;
 `
-
 const FlexFull = styled.div`
   flex: 1;
 `
 const Label = styled.div`
-  font-size: 14px;
+  font-family: GilroySemiBold;
+  font-size: 16px;
 `
 const TokenLink = styled.a`
-  font-size: 14px;
+  font-family: GilroySemiBold;
+  font-size: 16px;
   text-decoration: none;
-  color: #12aab5;
+  color: ${(props) => props.theme.colors.info};
 `
 
-const CardFooter: React.FC<Props> = ({
-  projectLink,
-  totalStaked,
-  blocksRemaining,
-  isFinished,
-  blocksUntilStart,
-  poolCategory,
-}) => {
+const CardFooter: React.FC<Props> = ({ projectLink, totalStaked, blocksRemaining, blocksUntilStart, poolCategory }) => {
   const [isOpen, setIsOpen] = useState(false)
   const TranslateString = useI18n()
-  const Icon = isOpen ? ChevronUp : ChevronDown
+  const Icon = isOpen ? ArrowDropUpIcon : ArrowDropDownIcon
 
   const handleClick = () => setIsOpen(!isOpen)
   const Tag = tags[poolCategory]
 
   return (
-    <StyledFooter isFinished={isFinished}>
+    <StyledFooter>
       <Row>
         <FlexFull>
           <Tag />
         </FlexFull>
         <StyledDetailsButton onClick={handleClick}>
-          {isOpen ? 'Hide' : 'Details'} <Icon />
+          {isOpen ? 'Hide' : 'Details'} <Icon color="currentColor" />
         </StyledDetailsButton>
       </Row>
       {isOpen && (
         <Details>
-          <Row style={{ marginBottom: '4px' }}>
+          <Row>
             <FlexFull>
-              <Label>
-                <span role="img" aria-label="syrup">
-                  🥙{' '}
-                </span>
-                {TranslateString(408, 'Total')}
-              </Label>
+              <Label>{TranslateString(408, 'Total:')}</Label>
             </FlexFull>
-            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStaked)} />
+            <Balance fontSize="16px" value={getBalanceNumber(totalStaked)} />
           </Row>
           {blocksUntilStart > 0 && (
             <Row>
               <FlexFull>
                 <Label>{TranslateString(410, 'Start')}:</Label>
               </FlexFull>
-              <Balance fontSize="14px" isDisabled={isFinished} value={blocksUntilStart} decimals={0} />
+              <Balance fontSize="16px" value={blocksUntilStart} decimals={0} />
             </Row>
           )}
           {blocksUntilStart === 0 && blocksRemaining > 0 && (
@@ -123,7 +109,7 @@ const CardFooter: React.FC<Props> = ({
               <FlexFull>
                 <Label>{TranslateString(410, 'End')}:</Label>
               </FlexFull>
-              <Balance fontSize="14px" isDisabled={isFinished} value={blocksRemaining} decimals={0} />
+              <Balance fontSize="16px" value={blocksRemaining} decimals={0} />
             </Row>
           )}
           <TokenLink href={projectLink} target="_blank">

@@ -6,11 +6,44 @@ import { provider } from 'web3-core'
 import { getContract } from 'utils/erc20'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
+import Container from 'components/layout/Container'
 import { useFarmFromSymbol, useFarmUser } from 'state/hooks'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import DualFarmDisclaimer from './components/DualFarmDisclaimer'
+import Hero from '../Farms/components/Hero'
 
+const StyledPage = styled(Page)`
+  padding-bottom: 24px;
+
+  @media (min-width: 852px) {
+    padding-bottom: 48px;
+  }
+`
+const StyledFarm = styled.div``
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 48px;
+  grid-template-columns: minmax(auto, 358px);
+  align-items: start;
+  justify-content: center;
+  padding: 38px 0;
+
+  @media (min-width: 852px) {
+    grid-template-columns: repeat(2, minmax(auto, 358px));
+  }
+`
+const StyledInfo = styled.h3`
+  color: ${(props) => props.theme.colors.primary};
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin: 0 80px;
+  }
+`
 const Farm: React.FC = () => {
   const TranslateString = useI18n()
   const { ethereum, account } = useWallet()
@@ -26,86 +59,36 @@ const Farm: React.FC = () => {
 
   return (
     <StyledPage>
-      <Header>
+      <Container>
         {/* <Image src={`/images/tokens/category-${tokenSymbol || 'KEBAB'}.png`} alt={tokenSymbol} /> */}
-        <Title>{TranslateString(999, 'Stake LP tokens to earn KEBAB')}</Title>
+        <Hero />
         {dual && <DualFarmDisclaimer tokenName={tokenSymbol} endBlock={dual.endBlock} />}
-      </Header>
-      <StyledFarm>
-        <Grid>
-          <Harvest pid={pid} earnings={earnings} />
-          <Stake
-            lpContract={lpContract}
-            pid={pid}
-            tokenName={lpSymbol.toUpperCase()}
-            allowance={allowance}
-            tokenBalance={tokenBalance}
-            stakedBalance={stakedBalance}
-          />
-        </Grid>
-        {dual ? (
-          <DualFarmDisclaimer tokenName={tokenSymbol} endBlock={dual.endBlock} />
-        ) : (
-          <StyledInfo>
-            {TranslateString(
-              590,
-              '⭐️ Every time you stake and unstake LP tokens, the contract will automagically harvest KEBAB rewards for you!',
-            )}
-          </StyledInfo>
-        )}
-      </StyledFarm>
+        <StyledFarm>
+          <Grid>
+            <Harvest pid={pid} earnings={earnings} />
+            <Stake
+              lpContract={lpContract}
+              pid={pid}
+              tokenName={lpSymbol.toUpperCase()}
+              allowance={allowance}
+              tokenBalance={tokenBalance}
+              stakedBalance={stakedBalance}
+            />
+          </Grid>
+          {dual ? (
+            <DualFarmDisclaimer tokenName={tokenSymbol} endBlock={dual.endBlock} />
+          ) : (
+            <StyledInfo>
+              {TranslateString(
+                590,
+                '⭐ Every time you stake and unstake LP tokens, the contract will automagically harvest KEBAB rewards for you!',
+              )}
+            </StyledInfo>
+          )}
+        </StyledFarm>
+      </Container>
     </StyledPage>
   )
 }
-
-const StyledPage = styled(Page)`
-  padding-bottom: 24px;
-  padding-top: 24px;
-
-  @media (min-width: 852px) {
-    padding-bottom: 48px;
-    padding-top: 48px;
-  }
-`
-
-const Header = styled.div`
-  text-align: center;
-`
-
-// const Image = styled.img`
-//   width: 160px;
-//   margin-bottom: 24px;
-// `
-
-const Title = styled.div`
-  color: ${(props) => props.theme.colors.secondary};
-  font-size: 24px;
-  font-weight: 900;
-  margin-bottom: 24px;
-`
-
-const StyledFarm = styled.div``
-
-const Grid = styled.div`
-  align-items: start;
-  display: grid;
-  grid-gap: 24px;
-  grid-template-columns: minmax(auto, 344px);
-  justify-content: center;
-  padding: 32px 0;
-
-  @media (min-width: 852px) {
-    grid-template-columns: repeat(2, minmax(auto, 344px));
-  }
-`
-
-const StyledInfo = styled.h3`
-  color: ${(props) => props.theme.colors.primary};
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-`
 
 export default Farm
