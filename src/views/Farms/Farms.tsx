@@ -1,20 +1,47 @@
 import React, { useCallback } from 'react'
+import {
+  Route,
+  useRouteMatch,
+  // NavLink
+} from 'react-router-dom'
 import styled from 'styled-components'
-import { Route, useRouteMatch, NavLink } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK, CAKE_POOL_PID, CAKE_POOL_BNB_PID } from 'config'
 import Grid from 'components/layout/Grid'
 import { useFarms } from 'state/hooks'
 import { QuoteToken } from 'config/constants/types'
-import useI18n from 'hooks/useI18n'
-import Page from 'components/Page'
+// import useI18n from 'hooks/useI18n'
+import Page from 'components/layout/Page'
+import Container from 'components/layout/Container'
+import Hero from './components/Hero'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
-import Divider from './components/Divider'
+
+// const StyledLink = styled(NavLink)`
+//   display: none;
+//   @media (max-width: 400px) {
+//     display: block;
+//     background: #50d7dd;
+//     border-radius: 5px;
+//     line-height: 40px;
+//     font-weight: 900;
+//     padding: 0 20px;
+//     margin-bottom: 30px;
+//     color: #fff;
+//   }
+// `
+const StyledGrid = styled(Grid)`
+  grid-gap: 20px;
+  margin-bottom: 100px;
+
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+`
 
 const Farms: React.FC = () => {
   const { path } = useRouteMatch()
-  const TranslateString = useI18n()
+  // const TranslateString = useI18n()
   const farmsLP = useFarms()
 
   const activeFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier !== '0X')
@@ -71,52 +98,23 @@ const Farms: React.FC = () => {
 
   return (
     <Page>
-      <Title>{TranslateString(999, 'Stake LP tokens to earn KEBAB')}</Title>
-      <StyledLink exact activeClassName="active" to="/pools">
-        Staking
-      </StyledLink>
-      <FarmTabButtons />
-      <Page>
-        <Divider />
-        <Route exact path={`${path}`}>
-          <Grid>{farmsList(activeFarms, false)}</Grid>
-        </Route>
-        <Route exact path={`${path}/history`}>
-          <Grid>{farmsList(inactiveFarms, true)}</Grid>
-        </Route>
-      </Page>
-      <Image src="/images/cakecat.png" />
+      <Container>
+        <Hero />
+        {/* <StyledLink exact activeClassName="active" to="/pools">
+          Staking
+        </StyledLink> */}
+        <FarmTabButtons />
+        <StyledGrid>
+          <Route exact path={`${path}`}>
+            {farmsList(activeFarms, false)}
+          </Route>
+          <Route exact path={`${path}/history`}>
+            {farmsList(inactiveFarms, true)}
+          </Route>
+        </StyledGrid>
+      </Container>
     </Page>
   )
 }
-
-const StyledLink = styled(NavLink)`
-  display: none;
-  @media (max-width: 400px) {
-    display: block;
-    background: #50d7dd;
-    border-radius: 5px;
-    line-height: 40px;
-    font-weight: 900;
-    padding: 0 20px;
-    margin-bottom: 30px;
-    color: #fff;
-  }
-`
-
-const Image = styled.img`
-  @media (max-width: 500px) {
-    width: 100vw;
-  }
-`
-
-const Title = styled.div`
-  color: ${(props) => props.theme.colors.secondary};
-  font-size: 29px;
-  width: 50vw;
-  text-align: center;
-  font-weight: 900;
-  margin: 50px;
-`
 
 export default Farms

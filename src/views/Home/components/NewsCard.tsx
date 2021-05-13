@@ -5,25 +5,29 @@ import { TwitterTimelineEmbed } from 'react-twitter-embed/dist'
 import useTheme from 'hooks/useTheme'
 
 const StyledCard = styled(Card)`
-  background-image: url('/images/tweeter.svg');
-  background-repeat: no-repeat;
-  background-position: 90% 5%;
-  background-size: 25%;
   background-color: ${({ theme }) => theme.colors.cardBackground2};
+  box-shadow: none;
   width: 100%;
-  height: 534px;
+  height: 439px;
+  margin: auto;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    margin: 0;
-    max-width: none;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    max-width: 358px;
   }
+`
+const CardBodyBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
   font-size: 32px;
   font-weight: 700;
   color: #1da1f2;
   margin-top: 14px;
-  margin-bottom: 38px;
+`
+const Image = styled.img`
+  width: 96px;
+  height: 78px;
 `
 
 const NewsCard = () => {
@@ -32,7 +36,10 @@ const NewsCard = () => {
   return (
     <StyledCard>
       <CardBody>
-        <CardTitle>Latest Chef Tweet</CardTitle>
+        <CardBodyBlock>
+          <CardTitle>Latest Chef Tweet</CardTitle>
+          <Image src="/images/tweeter.svg" alt="tweeter" />
+        </CardBodyBlock>
         {isDark ? (
           <TwitterTimelineEmbed
             sourceType="profile"

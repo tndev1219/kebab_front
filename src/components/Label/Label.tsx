@@ -11,8 +11,9 @@ const Label: React.FC<LabelProps> = ({ text, isFinished = false }) => (
 )
 
 const StyledLabel = styled.div<{ isFinished: boolean }>`
-  color: ${({ isFinished, theme }) => theme.colors[isFinished ? 'textDisabled' : 'primary']};
-  font-size: 14px;
+  color: ${({ isFinished, theme }) => theme.colors[isFinished ? 'textInactive' : 'primary']};
+  font-family: GilroySemiBold;
+  font-size: 16px;
 `
 
 export default Label

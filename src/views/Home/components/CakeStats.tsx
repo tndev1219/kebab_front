@@ -11,9 +11,6 @@ import { QuoteToken } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
 
 const StyledCard = styled(Card)`
-  background-color: ${({ theme }) => theme.colors.cardBackground3};
-  width: 100%;
-
   ${({ theme }) => theme.mediaQueries.sm} {
     display: flex;
   }
@@ -47,7 +44,7 @@ const StyledText = styled(Text)`
 const StyledIcon = styled(ArrowForwardIcon)`
   background-color: #e46149;
   border-radius: 50px;
-  fill: ${({ theme }) => theme.colors.cardBackground3};
+  fill: ${({ theme }) => theme.colors.card};
   margin-right: 13px;
 `
 const TotalValue = styled(Heading)`

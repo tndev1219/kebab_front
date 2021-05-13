@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Button, IconButton, useModal, AddIcon } from 'kebabfinance-uikit'
+import { Button, IconButton, useModal, AddIcon, CardBody, useWalletModal } from 'kebabfinance-uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import UnlockButton from 'components/UnlockButton'
 import Label from 'components/Label'
 import { useERC20 } from 'hooks/useContract'
 import { useSousApprove } from 'hooks/useApprove'
@@ -23,7 +22,6 @@ import CardTitle from './CardTitle'
 import CardTokenImg from './CardTokenImg'
 import Card from './Card'
 import OldSyrupTitle from './OldSyrupTitle'
-import HarvestButton from './HarvestButton'
 import CardFooter from './CardFooter'
 
 interface PoolWithApy extends Pool {
@@ -33,6 +31,43 @@ interface PoolWithApy extends Pool {
 interface HarvestProps {
   pool: PoolWithApy
 }
+
+const StyledCardBody = styled(CardBody)`
+  width: 100%;
+  padding: 38px 31px 16px 31px;
+`
+const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+`
+const BalanceAndCompound = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 4px;
+`
+const StyledCardActions = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+`
+const StyledActionSpacer = styled.div`
+  height: ${(props) => props.theme.spacing[4]}px;
+  width: ${(props) => props.theme.spacing[4]}px;
+`
+const StyledDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const StyledLabel = styled.div<{ isDisabled: boolean }>`
+  font-size: 16px;
+  font-family: GilroySemiBold;
+  color: ${({ isDisabled, theme }) => (isDisabled ? theme.colors.textInactive : 'currentColor')};
+`
 
 const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
   const {
@@ -57,12 +92,13 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
   const isBnbPool = poolCategory === PoolCategory.BINANCE
   const TranslateString = useI18n()
   const stakingTokenContract = useERC20(stakingTokenAddress)
-  const { account } = useWallet()
+  const { account, connect, reset } = useWallet()
   const block = useBlock()
   const { onApprove } = useSousApprove(stakingTokenContract, sousId)
   const { onStake } = useSousStake(sousId, isBnbPool)
   const { onUnstake } = useSousUnstake(sousId)
   const { onReward } = useSousHarvest(sousId, isBnbPool)
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
 
   const [requestedApproval, setRequestedApproval] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
@@ -113,31 +149,28 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
     }
   }, [onApprove, setRequestedApproval])
 
-  // console.log(tokenDecimals, earnings.toNumber())
-
   return (
     <Card isActive={isCardActive} isFinished={isFinished && sousId !== 0}>
-      {isFinished && sousId !== 0 && <PoolFinishedSash />}
-      <div style={{ padding: '24px' }}>
-        <CardTitle isFinished={isFinished && sousId !== 0}>
-          {isOldSyrup && '[OLD]'} {tokenName} {TranslateString(348, 'Pool')}
-        </CardTitle>
-        <div style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}>
-          <div style={{ flex: 1 }}>
-            <CardTokenImg src={`/images/tokens/${image || tokenName}.png`} alt={tokenName} />
-          </div>
+      <StyledCardBody>
+        <CardHeader>
+          <CardTitle isFinished={isFinished && sousId !== 0}>
+            {isOldSyrup && '[OLD]'} {tokenName} {TranslateString(348, 'Pool')}
+          </CardTitle>
           {account && harvest && !isOldSyrup && (
-            <HarvestButton
+            <Button
+              size="sm"
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? 'Collecting' : 'Harvest'}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()
                 setPendingTx(false)
               }}
-            />
+            >
+              {pendingTx ? 'Collecting' : 'Harvest'}
+            </Button>
           )}
-        </div>
+        </CardHeader>
+        <CardTokenImg src={`/images/tokens/${image || tokenName}.png`} alt={tokenName} />
         {!isOldSyrup ? (
           <BalanceAndCompound>
             <Balance
@@ -146,11 +179,9 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
               decimals={displayedDecimals}
             />
             {sousId === 0 && account && harvest && (
-              <HarvestButton
-                disabled={!earnings.toNumber() || pendingTx}
-                text={pendingTx ? TranslateString(999, 'Compounding') : TranslateString(999, 'Compound')}
-                onClick={onPresentCompound}
-              />
+              <Button size="sm" disabled={!earnings.toNumber() || pendingTx} onClick={onPresentCompound}>
+                {pendingTx ? TranslateString(999, 'Compounding') : TranslateString(999, 'Compound')}
+              </Button>
             )}
           </BalanceAndCompound>
         ) : (
@@ -158,14 +189,16 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
         )}
         <Label isFinished={isFinished && sousId !== 0} text={TranslateString(330, `${tokenName} earned`)} />
         <StyledCardActions>
-          {!account && <UnlockButton />}
+          {!account && (
+            <Button fullWidth onClick={onPresentConnectModal}>
+              {TranslateString(292, 'Unlock Wallet')}
+            </Button>
+          )}
           {account &&
             (needsApproval && !isOldSyrup ? (
-              <div style={{ flex: 1 }}>
-                <Button disabled={isFinished || requestedApproval} onClick={handleApprove} fullWidth>
-                  {`Approve ${stakingTokenName}`}
-                </Button>
-              </div>
+              <Button disabled={isFinished || requestedApproval} onClick={handleApprove} fullWidth>
+                {`Approve ${stakingTokenName}`}
+              </Button>
             ) : (
               <>
                 <Button
@@ -192,69 +225,27 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
             ))}
         </StyledCardActions>
         <StyledDetails>
-          <div style={{ flex: 1 }}>{TranslateString(352, 'APY')}:</div>
+          <StyledLabel isDisabled={isFinished}>{TranslateString(352, 'APY')}:</StyledLabel>
           {isFinished || isOldSyrup || !apy || apy?.isNaN() || !apy?.isFinite() ? (
-            '-'
+            <StyledLabel isDisabled={isFinished}>-</StyledLabel>
           ) : (
-            <Balance fontSize="14px" isDisabled={isFinished} value={apy?.toNumber()} decimals={2} unit="%" />
+            <Balance fontSize="16px" isDisabled={isFinished} value={apy?.toNumber()} decimals={2} unit="%" />
           )}
         </StyledDetails>
         <StyledDetails>
-          <div style={{ flex: 1 }}>
-            <span role="img" aria-label={stakingTokenName}>
-              🥙{' '}
-            </span>
-            {TranslateString(384, 'Your Stake')}:
-          </div>
-          <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(stakedBalance)} />
+          <StyledLabel isDisabled={isFinished}>🥙 {TranslateString(384, 'Your Stake')}:</StyledLabel>
+          <Balance fontSize="16px" isDisabled={isFinished} value={getBalanceNumber(stakedBalance)} />
         </StyledDetails>
-      </div>
-      <CardFooter
-        projectLink={projectLink}
-        totalStaked={totalStaked}
-        blocksRemaining={blocksRemaining}
-        isFinished={isFinished}
-        blocksUntilStart={blocksUntilStart}
-        poolCategory={poolCategory}
-      />
+        <CardFooter
+          projectLink={projectLink}
+          totalStaked={totalStaked}
+          blocksRemaining={blocksRemaining}
+          blocksUntilStart={blocksUntilStart}
+          poolCategory={poolCategory}
+        />
+      </StyledCardBody>
     </Card>
   )
 }
-
-const PoolFinishedSash = styled.div`
-  background-image: url('/images/pool-finished-sash.svg');
-  background-position: top right;
-  background-repeat: not-repeat;
-  height: 135px;
-  position: absolute;
-  right: -24px;
-  top: -24px;
-  width: 135px;
-`
-
-const StyledCardActions = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 16px 0;
-  width: 100%;
-  box-sizing: border-box;
-`
-
-const BalanceAndCompound = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-`
-
-const StyledActionSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`
-
-const StyledDetails = styled.div`
-  display: flex;
-  font-size: 14px;
-`
 
 export default PoolCard

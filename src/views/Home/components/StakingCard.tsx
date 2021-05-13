@@ -2,20 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody } from 'kebabfinance-uikit'
 // import useI18n from 'hooks/useI18n'
-import { Link } from 'react-router-dom'
 
 const StyledTradeCard = styled(Card)`
   background-color: #f7931a;
   margin-left: auto;
   margin-right: auto;
-  max-width: 202px;
-  height: 242px;
+  max-width: 178px;
+  height: 214px;
   width: 100%;
   cursor: pointer;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    margin: 0;
-  }
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
   font-size: 28px;
@@ -26,7 +21,7 @@ const CardTitle = styled(Heading).attrs({ size: 'lg' })`
 `
 const CardImage = styled.img`
   position: absolute;
-  bottom: -8px;
+  bottom: -12px;
   right: -3px;
 `
 
@@ -34,14 +29,14 @@ const TradeCard = () => {
   // const TranslateString = useI18n()
 
   return (
-    <StyledTradeCard>
-      <Link to="/pools">
+    <a href="/#/pools" style={{ width: '100%' }}>
+      <StyledTradeCard>
         <CardBody>
           <CardTitle>Staking</CardTitle>
           <CardImage src="/images/staking_bg.svg" alt="staking btn" />
         </CardBody>
-      </Link>
-    </StyledTradeCard>
+      </StyledTradeCard>
+    </a>
   )
 }
 

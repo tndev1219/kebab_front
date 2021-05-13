@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from 'kebabfinance-uikit'
+import { Heading, Text } from 'kebabfinance-uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
@@ -21,15 +21,15 @@ const Hero = styled.div`
   background-size: contain;
   align-items: center;
   margin: 32px auto;
-  max-width: 904px;
+  max-width: 738px;
   padding-top: 160px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    height: 250px;
+    height: 300px;
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
-    height: 300px;
+    height: 396px;
   }
 
   ${({ theme }) => theme.mediaQueries.lg} {
@@ -53,56 +53,42 @@ const Subtitle = styled(Text)`
   text-align: center;
   margin-bottom: 48px;
 `
-const SmallCardsWrapper = styled(BaseLayout)`
-  align-items: stretch;
-  justify-content: stretch;
+const SmallCardsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
   margin-bottom: 48px;
 
-  & > div {
-    grid-column: span 6;
-  }
-
   ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 4;
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
-    & > div {
-      grid-column: span 3;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
-const MediumCardsWrapper = styled(BaseLayout)`
-  align-items: stretch;
-  justify-content: stretch;
+const MediumCardsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 16px;
   margin-bottom: 64px;
 
-  & > div {
-    grid-column: span 6;
-  }
-
   ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 4;
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
-    & > div {
-      grid-column: span 6;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
-const BigCardsWrapper = styled(BaseLayout)`
-  align-items: stretch;
-  justify-content: stretch;
-  margin-bottom: 48px;
-
-  & > div {
-    grid-column: span 12;
-  }
+const BigCardsWrapper = styled.div`
+  margin-bottom: 80px;
 `
 
 const Home: React.FC = () => {

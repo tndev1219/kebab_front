@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon } from 'kebabfinance-uikit'
+import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon, VerifyInfoIcon } from 'kebabfinance-uikit'
 
 const CoreTag = () => (
   <Tag variant="secondary" outline startIcon={<VerifiedIcon />}>
@@ -8,7 +8,7 @@ const CoreTag = () => (
 )
 
 const CommunityTag = () => (
-  <Tag variant="textSubtle" outline startIcon={<CommunityIcon />}>
+  <Tag variant="info" outline startIcon={<CommunityIcon />}>
     Community
   </Tag>
 )
@@ -20,31 +20,31 @@ const BinanceTag = () => (
 )
 
 const Defcon1 = () => (
-  <Tag variant="textSubtle" outline startIcon={<VerifiedIcon />}>
+  <Tag variant="success" outline startIcon={<VerifyInfoIcon />}>
     Risk 1
   </Tag>
 )
 
 const Defcon2 = () => (
-  <Tag variant="secondary" outline startIcon={<VerifiedIcon />}>
+  <Tag variant="secondary" outline startIcon={<VerifyInfoIcon />}>
     Risk 2
   </Tag>
 )
 
 const Defcon3 = () => (
-  <Tag variant="secondary" outline startIcon={<VerifiedIcon />}>
+  <Tag variant="secondary" outline startIcon={<VerifyInfoIcon />}>
     Risk 3
   </Tag>
 )
 
 const Defcon4 = () => (
-  <Tag variant="secondary" outline startIcon={<VerifiedIcon />}>
+  <Tag variant="secondary" outline startIcon={<VerifyInfoIcon />}>
     Risk 4
   </Tag>
 )
 
 const Defcon5 = () => (
-  <Tag variant="binance" outline startIcon={<CommunityIcon />}>
+  <Tag variant="primary" outline startIcon={<VerifyInfoIcon />}>
     Risk 5
   </Tag>
 )

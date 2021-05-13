@@ -4,13 +4,20 @@ import { useRouteMatch, Link } from 'react-router-dom'
 import { ButtonMenu, ButtonMenuItem } from 'kebabfinance-uikit'
 import useI18n from 'hooks/useI18n'
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+`
+
 const PoolTabButtons = () => {
   const { url, isExact } = useRouteMatch()
   const TranslateString = useI18n()
 
   return (
     <Wrapper>
-      <ButtonMenu activeIndex={!isExact ? 1 : 0} size="sm" variant="subtle">
+      <ButtonMenu activeIndex={!isExact ? 1 : 0} size="sm" variant="primary">
         <ButtonMenuItem as={Link} to={`${url}`}>
           {TranslateString(999, 'Active')}
         </ButtonMenuItem>
@@ -23,10 +30,3 @@ const PoolTabButtons = () => {
 }
 
 export default PoolTabButtons
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 32px;
-`
