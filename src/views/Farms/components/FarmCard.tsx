@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import BigNumber from 'bignumber.js'
-import styled from // keyframes,
-'styled-components'
+import styled from 'styled-components' // keyframes,
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { Button, Card, CardBody, Heading, useWalletModal } from 'kebabfinance-uikit'

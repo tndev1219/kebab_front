@@ -49,17 +49,17 @@ const StyledTokenAdornmentWrapper = styled.div`
 `
 
 const StyledMaxText = styled.div`
-  align-items: center;
-  color: ${(props) => props.theme.colors.primary};
   display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  height: 44px;
   justify-content: flex-end;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: ${(props) => props.theme.colors.primary};
+  margin-bottom: 16px;
 `
 
 const StyledTokenSymbol = styled.span`
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.footer};
   font-weight: 700;
 `
 
