@@ -1,64 +1,57 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text } from 'kebabfinance-uikit'
+import { Heading, Card, CardBody } from 'kebabfinance-uikit'
 import useI18n from 'hooks/useI18n'
 
-const Title = styled(Heading).attrs({ as: 'h1', size: 'xl' })`
-  color: #fff;
-  margin-bottom: 24px;
-  font-weight: bold;
-  font-size: 48px;
-`
-
-const Blurb = styled(Text)`
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.017em;
-`
-
-const StyledHero = styled.div`
-  background: #404040;
-  padding-bottom: 40px;
-  padding-top: 40px;
+const StyledCard = styled(Card)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 214px;
+  background-color: #404040;
+  overflow: visible;
   margin-top: 60px;
-  margin-bottom: 32px;
-  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
-  border-radius: 19px;
-  position: relative;
-`
+  margin-bottom: 35px;
 
-const Image = styled.img`
-  display: none;
-  position: absolute;
-  bottom: -24px;
-  right: 24px;
   ${({ theme }) => theme.mediaQueries.sm} {
-    display: block;
+    justify-content: space-between;
+    margin-top: 110px;
   }
 `
-
-const FlexWrapper = styled.div`
-  display: flex;
+const StyledCardBody = styled(CardBody)`
+  padding-left: 61px;
 `
-
-const TextWrapper = styled.div`
-  padding: 20px;
+const CardTitle = styled(Heading).attrs({ size: 'lg' })`
+  font-size: 48px;
+  color: white;
 `
+const Blurb = styled(Heading).attrs({ size: 'lg' })`
+  font-size: 16px;
+  color: white;
+  margin-top: 16px;
+`
+const Image = styled.img`
+  display: none;
 
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: block;
+    width: 258px;
+    height: 291px;
+    margin-top: -40px;
+    margin-right: 33px;
+  }
+`
 const Hero = () => {
   const TranslateString = useI18n()
 
   return (
-    <StyledHero>
-      <FlexWrapper>
-        <TextWrapper>
-          <Title>{TranslateString(500, 'IFO: Initial Farm Offerings')}</Title>
-          <Blurb>{TranslateString(502, 'Buy new tokens with a brand new token sale model.')}</Blurb>
-        </TextWrapper>
-        <Image src="/images/ifos/ifo-kebab.png" alt="ifo kebab" />
-      </FlexWrapper>
-    </StyledHero>
+    <StyledCard>
+      <StyledCardBody>
+        <CardTitle>{TranslateString(500, 'IFO: Initial Farm Offerings')}</CardTitle>
+        <Blurb>{TranslateString(502, 'Buy new tokens with a brand new token sale model.')}</Blurb>
+      </StyledCardBody>
+      <Image src="/images/ifos/ifo-kebab.png" alt="ifo kebab" />
+    </StyledCard>
   )
 }
 

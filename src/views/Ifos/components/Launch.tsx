@@ -3,36 +3,46 @@ import styled from 'styled-components'
 import { Heading, Text, Button } from 'kebabfinance-uikit'
 import useI18n from 'hooks/useI18n'
 
+const StyledLaunch = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 71px;
+  margin-bottom: 32px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    flex-direction: row;
+  }
+`
+const Image = styled.img`
+  width: 324px;
+  height: 393px;
+`
+const RightText = styled.div`
+  text-align: center;
+  padding-top: 50px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    text-align: right;
+    padding-left: 50px;
+  }
+`
 const Title = styled(Heading).attrs({ as: 'h1', size: 'xl' })`
   color: #e46149;
   font-size: 32px;
   margin-bottom: 16px;
-`
 
-const Blurb = styled(Text)`
-  color: #23001e;
-  font-size: 16px;
-  line-height: 19px;
-  margin-bottom: 16px;
-`
-
-const StyledLaunch = styled.div`
-  margin-top: 60px;
-  margin-bottom: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    flex-direction: row;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-left: 82px;
   }
 `
-
-const Image = styled.img``
-
-const RightText = styled.div`
-  text-align: right;
-  padding-left: 20px;
+const Blurb = styled(Text)`
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  margin-bottom: 30px;
 `
 
 const Launch = () => {
@@ -55,7 +65,7 @@ const Launch = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {TranslateString(516, 'Apply to launch')}
+          {TranslateString(516, 'Apply to Launch')}
         </Button>
       </RightText>
     </StyledLaunch>
