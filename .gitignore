@@ -24,6 +24,7 @@
 .env
 .eslintcache
 
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -31,3 +32,4 @@ yarn-error.log*
 
 # gitignore
 sftp-config.json
+yarn.lock

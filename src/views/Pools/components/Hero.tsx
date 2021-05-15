@@ -95,7 +95,7 @@ const Hero = () => {
         <CardDescription>
           Stake KEBAB to earn new tokens. You can unstake at any time. Rewards are calculated per block.
         </CardDescription>
-        <StyledButton
+        {/* <StyledButton
           variant="tertiary"
           size="sm"
           startIcon={<BurnIcon color="currentColor" style={{ width: 15 }} />}
@@ -103,7 +103,7 @@ const Hero = () => {
           onClick={onPresentBurn}
         >
           Burn
-        </StyledButton>
+        </StyledButton> */}
       </StyledCardBody>
       <CardImage src="/images/ketchup.png" alt="ketchup img" />
     </StyledCard>
