@@ -1,5 +1,6 @@
-import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
+import styled from 'styled-components'
+import BigNumber from 'bignumber.js'
 import { Button, Modal } from 'kebabfinance-uikit'
 import ModalActions from 'components/ModalActions'
 import TokenInput from '../../../components/TokenInput'
@@ -12,6 +13,14 @@ interface WithdrawModalProps {
   onDismiss?: () => void
   tokenName?: string
 }
+
+const ActionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 45px 0px 45px;
+`
 
 const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
   const [val, setVal] = useState('')
@@ -41,22 +50,25 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
         max={fullBalance}
         symbol={tokenName}
       />
-      <ModalActions>
-        <Button variant="secondary" onClick={onDismiss}>
-          {TranslateString(462, 'Cancel')}
-        </Button>
-        <Button
-          disabled={pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onConfirm(val)
-            setPendingTx(false)
-            onDismiss()
-          }}
-        >
-          {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
-        </Button>
-      </ModalActions>
+      <ActionWrapper>
+        <ModalActions>
+          <Button variant="secondary" fullWidth onClick={onDismiss}>
+            {TranslateString(462, 'Cancel')}
+          </Button>
+          <Button
+            fullWidth
+            disabled={pendingTx}
+            onClick={async () => {
+              setPendingTx(true)
+              await onConfirm(val)
+              setPendingTx(false)
+              onDismiss()
+            }}
+          >
+            {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
+          </Button>
+        </ModalActions>
+      </ActionWrapper>
     </Modal>
   )
 }

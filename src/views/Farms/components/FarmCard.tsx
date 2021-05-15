@@ -166,7 +166,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed }) => {
     <FCard>
       {/* {farm.tokenSymbol === 'KEBAB' && <StyledCardAccent />} */}
       <StyledCardBody>
-        <CardTitle>KEBAB-BTCB LP</CardTitle>
+        <CardTitle>{farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')}</CardTitle>
         <CardImage>
           <img src={`/images/farms/${farmImage}.png`} alt={farm.tokenSymbol} />
           <CardImageItems>

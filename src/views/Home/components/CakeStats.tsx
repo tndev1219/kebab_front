@@ -90,21 +90,21 @@ const CakeStats = () => {
             <StyledIcon />
             {TranslateString(536, 'Total KEBAB Supply')}
           </StyledText>
-          {cakeSupply && <CardValue fontSize="16px" value={cakeSupply} />}
+          {cakeSupply && <CardValue fontSize="16px" value={cakeSupply} color="#E46149" />}
         </Row>
         <Row>
           <StyledText>
             <StyledIcon />
             {TranslateString(538, 'Total KEBAB Burned')}
           </StyledText>
-          <CardValue fontSize="16px" value={getBalanceNumber(burnedBalance)} />
+          <CardValue fontSize="16px" value={getBalanceNumber(burnedBalance)} color="#E46149" />
         </Row>
         <Row>
           <StyledText>
             <StyledIcon />
             {TranslateString(540, 'New KEBAB/block')}
           </StyledText>
-          <CardValue fontSize="16px" decimals={0} value={1} />
+          <CardValue fontSize="16px" decimals={0} value={1} color="#E46149" />
         </Row>
       </StyleCardBody>
       <StyleCardBody>
