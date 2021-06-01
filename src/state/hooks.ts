@@ -2,12 +2,17 @@ import BigNumber from 'bignumber.js'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useRefresh from 'hooks/useRefresh'
+import { FarmConfig, PoolConfig } from 'config/constants/types'
+import { GET_FARMS_LIST_URL } from 'config/constants/farms'
+import { GET_POOLS_LIST_URL } from 'config/constants/pools'
 import {
   fetchFarmsPublicDataAsync,
   fetchFarmUserDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
 } from './actions'
+import { setFarmsPublicData } from './farms'
+import { setPoolsPublicData } from './pools'
 import { State, Farm, Pool, PriceState } from './types'
 import { fetchPrices } from './prices'
 
@@ -58,9 +63,31 @@ export const useFarmUser = (pid, account) => {
   }
 }
 
-// Pools
+export const useGetFarmsList = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(GET_FARMS_LIST_URL)
+        const data: FarmConfig[] = await response.json()
 
-export const usePools = (account): Pool[] => {
+        dispatch(setFarmsPublicData(data))
+      } catch (error) {
+        console.error('Unable to fetch farms list:', error)
+      }
+    }
+
+    fetchData()
+  }, [dispatch])
+}
+
+// Pools
+export const usePools = (): Pool[] => {
+  const pools = useSelector((state: State) => state.pools.data)
+  return pools
+}
+
+export const usePoolsUser = (account): Pool[] => {
   const { fastRefresh } = useRefresh()
   const dispatch = useDispatch()
   useEffect(() => {
@@ -76,6 +103,24 @@ export const usePools = (account): Pool[] => {
 export const usePoolFromPid = (sousId): Pool => {
   const pool = useSelector((state: State) => state.pools.data.find((p) => p.sousId === sousId))
   return pool
+}
+
+export const useGetPoolsList = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(GET_POOLS_LIST_URL)
+        const data: PoolConfig[] = await response.json()
+
+        dispatch(setPoolsPublicData(data))
+      } catch (error) {
+        console.error('Unable to fetch pools list:', error)
+      }
+    }
+
+    fetchData()
+  }, [dispatch])
 }
 
 // Prices

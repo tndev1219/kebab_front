@@ -9,7 +9,7 @@ import partition from 'lodash/partition'
 // import useI18n from 'hooks/useI18n'
 import useBlock from 'hooks/useBlock'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useFarms, usePools } from 'state/hooks'
+import { useFarms, usePoolsUser } from 'state/hooks'
 // import { QuoteToken, PoolCategory } from 'config/constants/types'
 import Page from 'components/layout/Page'
 import Container from 'components/layout/Container'
@@ -50,7 +50,7 @@ const Pool: React.FC = () => {
   // const TranslateString = useI18n()
   const { account } = useWallet()
   const farms = useFarms()
-  const pools = usePools(account)
+  const pools = usePoolsUser(account)
   // const bnbPriceUSD = usePriceBnbBusd()
   const block = useBlock()
 

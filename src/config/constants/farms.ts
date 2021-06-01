@@ -1,6 +1,8 @@
 import contracts from './contracts'
 import { FarmConfig, QuoteToken } from './types'
 
+export const GET_FARMS_LIST_URL = 'https://run.mocky.io/v3/f3f2c66d-65b5-4a1c-a7aa-9d8ee8710f42'
+
 const farms: FarmConfig[] = [
   {
     pid: 0,

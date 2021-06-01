@@ -3,8 +3,8 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import multicall from 'utils/multicall'
 import { getMasterChefAddress } from 'utils/addressHelpers'
+import { useFarms } from 'state/hooks'
 import masterChefABI from 'config/abi/masterchef.json'
-import { farmsConfig } from 'config/constants'
 import { FarmConfig } from 'config/constants/types'
 import useRefresh from './useRefresh'
 
@@ -16,6 +16,8 @@ const useFarmsWithBalance = () => {
   const [farmsWithBalances, setFarmsWithBalances] = useState<FarmWithBalance[]>([])
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
+
+  const farmsConfig = useFarms()
 
   useEffect(() => {
     const fetchBalances = async () => {
@@ -34,7 +36,7 @@ const useFarmsWithBalance = () => {
     if (account) {
       fetchBalances()
     }
-  }, [account, fastRefresh])
+  }, [account, fastRefresh, farmsConfig])
 
   return farmsWithBalances
 }

@@ -1,5 +1,7 @@
 import { PoolConfig, QuoteToken, PoolCategory } from './types'
 
+export const GET_POOLS_LIST_URL = 'https://run.mocky.io/v3/e54c1ca3-b087-4143-8457-919dc0630cff'
+
 const pools: PoolConfig[] = [
   {
     sousId: 0,

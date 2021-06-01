@@ -3,11 +3,12 @@ import erc20ABI from 'config/abi/erc20.json'
 import masterchefABI from 'config/abi/masterchef.json'
 import multicall from 'utils/multicall'
 import { getMasterChefAddress } from 'utils/addressHelpers'
-import farmsConfig from 'config/constants/farms'
+import getFarmsList from 'utils/getFarmsList'
 
 const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
 
 const fetchFarmUser = async (pid: number, account: string) => {
+  const farmsConfig = await getFarmsList()
   const farm = farmsConfig.find((f) => f.pid === pid)
   const masterChefAdress = getMasterChefAddress()
   const lpContractAddress = farm.lpAddresses[CHAIN_ID]
