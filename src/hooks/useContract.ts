@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AbiItem } from 'web3-utils'
 import { ContractOptions } from 'web3-eth-contract'
+import { usePools } from 'state/hooks'
 import useWeb3 from 'hooks/useWeb3'
 import {
   getMasterChefAddress,
@@ -9,7 +10,6 @@ import {
   getLotteryTicketAddress,
   getBurnAddress,
 } from 'utils/addressHelpers'
-import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
 import ifo from 'config/abi/ifo.json'
 import erc20 from 'config/abi/erc20.json'
@@ -77,6 +77,7 @@ export const useMasterchef = () => {
 }
 
 export const useSousChef = (id) => {
+  const poolsConfig = usePools()
   const config = poolsConfig.find((pool) => pool.sousId === id)
   const rawAbi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
   const abi = (rawAbi as unknown) as AbiItem

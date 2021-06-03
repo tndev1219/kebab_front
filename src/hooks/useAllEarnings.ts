@@ -2,14 +2,16 @@ import { useEffect, useState } from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import multicall from 'utils/multicall'
 import { getMasterChefAddress } from 'utils/addressHelpers'
+import { useFarms } from 'state/hooks'
 import masterChefABI from 'config/abi/masterchef.json'
-import { farmsConfig } from 'config/constants'
 import useRefresh from './useRefresh'
 
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([])
   const { account }: { account: string } = useWallet()
   const { fastRefresh } = useRefresh()
+
+  const farmsConfig = useFarms()
 
   useEffect(() => {
     const fetchAllBalances = async () => {
@@ -27,7 +29,7 @@ const useAllEarnings = () => {
     if (account) {
       fetchAllBalances()
     }
-  }, [account, fastRefresh])
+  }, [account, fastRefresh, farmsConfig])
 
   return balances
 }

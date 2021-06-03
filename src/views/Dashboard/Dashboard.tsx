@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { BLOCKS_PER_YEAR } from 'config'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceCakeBusd, usePools } from 'state/hooks'
+import { useFarms, usePriceCakeBusd, usePoolsUser } from 'state/hooks'
 import { Farm } from 'state/types'
 import useBlock from 'hooks/useBlock'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -31,7 +31,7 @@ const Pool = styled.div`
 const Dashboard: React.FC = () => {
   const { account } = useWallet()
   const farmsLP = useFarms()
-  const pools = usePools(account)
+  const pools = usePoolsUser(account)
   const cakePrice = usePriceCakeBusd()
   const block = useBlock()
 

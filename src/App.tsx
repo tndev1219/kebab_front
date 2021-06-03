@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ResetCSS } from 'kebabfinance-uikit'
 import BigNumber from 'bignumber.js'
-import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
+import { useGetFarmsList, useGetPoolsList, useFetchPriceList, useFetchPublicData } from 'state/hooks'
 import Ifos from 'views/Ifos'
 import Farms from './views/Farms'
 import Farm from './views/Farm'
@@ -28,6 +28,8 @@ const App: React.FC = () => {
     }
   }, [account, connect])
 
+  useGetFarmsList()
+  useGetPoolsList()
   useFetchPublicData()
   useFetchPriceList()
 
