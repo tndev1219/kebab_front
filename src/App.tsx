@@ -10,6 +10,7 @@ import Farm from './views/Farm'
 import Home from './views/Home'
 import Pools from './views/Pools'
 import Dashboard from './views/Dashboard'
+import KSLV from './views/KSLV'
 import NotFound from './views/NotFound'
 import Menu from './components/Menu'
 import GlobalStyle from './style/Global'
@@ -56,6 +57,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/ifo">
             <Ifos />
+          </Route>
+          <Route path="/kslv">
+            <KSLV />
           </Route>
           {/* 404 */}
           <Route component={NotFound} />

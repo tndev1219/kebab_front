@@ -25,13 +25,6 @@ const config: MenuEntry[] = [
     backgroundColor: '#D1E5F2',
   },
   {
-    label: 'Dashboard',
-    icon: 'DashboardIcon',
-    href: '/dashboard',
-    color: '#7A23BE',
-    backgroundColor: '#E4D3F2',
-  },
-  {
     label: 'Farming',
     icon: 'FarmIcon',
     href: '/farms',
@@ -51,6 +44,20 @@ const config: MenuEntry[] = [
     href: '/ifo',
     color: '#404040',
     backgroundColor: '#D9D9D9',
+  },
+  {
+    label: 'Dashboard',
+    icon: 'DashboardIcon',
+    href: '/dashboard',
+    color: '#7A23BE',
+    backgroundColor: '#E4D3F2',
+  },
+  {
+    label: 'KSLV',
+    icon: 'KSLVIcon',
+    href: '/kslv',
+    color: '#7C7C7C',
+    backgroundColor: '#E5E5E5',
   },
   {
     label: 'Info',
