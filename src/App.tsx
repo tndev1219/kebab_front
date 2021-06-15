@@ -58,7 +58,7 @@ const App: React.FC = () => {
           <Route path="/ifo">
             <Ifos />
           </Route>
-          <Route path="/kslv">
+          <Route path="/metals">
             <KSLV />
           </Route>
           {/* 404 */}

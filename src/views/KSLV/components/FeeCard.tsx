@@ -37,7 +37,7 @@ const FeeCard = () => {
       <StyledCardBody>
         <CardTitle>Storage Fees</CardTitle>
         <Blurb>
-          Our metal tokens would decay in real-time to account for the costs of moving and storing all our physical
+          Our metal tokens would decay in real-time to account for <a href="https://docs.kebabfinance.com/kebab-documentation/silver/why/storage-fees">the costs of moving and storing</a> all our physical
           metals. For KSLV this will be at a rate of 0.005479151% daily, or about 2% yearly. This rate of decay would
           differ for various types of metals as the cost for the storage of different metals also varies in price.
         </Blurb>

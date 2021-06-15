@@ -35,7 +35,7 @@ const DefiCard = () => {
   return (
     <StyledCard>
       <StyledCardBody>
-        <CardTitle>The Future of DeFi</CardTitle>
+        <CardTitle>Sound Tokens</CardTitle>
         <Blurb>
           Imagine a world where the adoption and demand for metal backed tokens outpaces that of stable coins. Where
           DeFi users are staking digital silver instead of USDT or BUSD. That is the long term goal of our team for this

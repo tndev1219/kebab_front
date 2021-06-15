@@ -28,39 +28,66 @@ const CardTitle = styled(Heading).attrs({ size: 'lg' })`
   color: #34c759;
 `
 const data = [
-  {
-    name: '',
-    yAxis: '',
-    uv: 400,
-  },
-  {
-    name: 'Y1',
-    yAxis: 'A1',
-    uv: 180,
-  },
-  {
-    name: 'Y2',
-    yAxis: 'A2',
-    uv: 95,
-  },
-  {
-    name: 'Y3',
-    yAxis: 'A3',
-    uv: 60,
-  },
-  {
-    name: 'Y4',
-    yAxis: 'A4',
-    uv: 50,
-  },
+  { name: 'Y0', uv: 10000 },
+  { name: 'Y1', uv: 9800 },
+  { name: 'Y2', uv: 9604 },
+  { name: 'Y3', uv: 9412 },
+  { name: 'Y4', uv: 9224 },
+  { name: 'Y5', uv: 9039 },
+  { name: 'Y6', uv: 8858 },
+  { name: 'Y7', uv: 8681 },
+  { name: 'Y8', uv: 8508 },
+  { name: 'Y9', uv: 8337 },
+  { name: 'Y10', uv: 8171 },
+  { name: 'Y11', uv: 8007 },
+  { name: 'Y12', uv: 7847 },
+  { name: 'Y13', uv: 7690 },
+  { name: 'Y14', uv: 7536 },
+  { name: 'Y15', uv: 7386 },
+  { name: 'Y16', uv: 7238 },
+  { name: 'Y17', uv: 7093 },
+  { name: 'Y18', uv: 6951 },
+  { name: 'Y19', uv: 6812 },
+  { name: 'Y20', uv: 6676 },
+  { name: 'Y21', uv: 6543 },
+  { name: 'Y22', uv: 6412 },
+  { name: 'Y23', uv: 6283 },
+  { name: 'Y24', uv: 6158 },
+  { name: 'Y25', uv: 6035 },
+  { name: 'Y26', uv: 5914 },
+  { name: 'Y27', uv: 5796 },
+  { name: 'Y28', uv: 5680 },
+  { name: 'Y29', uv: 5566 },
+  { name: 'Y30', uv: 5455 },
+  { name: 'Y31', uv: 5346 },
+  { name: 'Y32', uv: 5239 },
+  { name: 'Y33', uv: 5134 },
+  { name: 'Y34', uv: 5031 },
+  { name: 'Y35', uv: 4931 },
+  { name: 'Y36', uv: 4832 },
+  { name: 'Y37', uv: 4735 },
+  { name: 'Y38', uv: 4641 },
+  { name: 'Y39', uv: 4548 },
+  { name: 'Y40', uv: 4457 },
+  { name: 'Y41', uv: 4368 },
+  { name: 'Y42', uv: 4281 },
+  { name: 'Y43', uv: 4195 },
+  { name: 'Y44', uv: 4111 },
+  { name: 'Y45', uv: 4029 },
+  { name: 'Y46', uv: 3948 },
+  { name: 'Y47', uv: 3869 },
+  { name: 'Y48', uv: 3792 },
+  { name: 'Y49', uv: 3716 },
+  { name: 'Y50', uv: 3642 }
 ]
+
 
 const FeeCard = () => {
   const DataFormater = (number) => {
     if (number === 0) {
       return ''
     }
-    return `A${9 - number / 50}`
+    return (number/100).toString()
   }
 
   return (
@@ -89,7 +116,7 @@ const FeeCard = () => {
               type="number"
               domain={[0, 400]}
               tickFormatter={DataFormater}
-              tickCount={9}
+              tickCount={5}
               tick={{ stroke: '#F5F5F7', fontSize: 12 }}
               axisLine={false}
               tickLine={false}

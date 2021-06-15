@@ -11,6 +11,7 @@ const StyledCard = styled(Card)`
   margin-top: 25px;
   box-shadow: none;
   border-radius: 40px;
+  margin-bottom: 150px;
 
   background-image: url('/images/kslv/access.png');
   background-repeat: no-repeat;

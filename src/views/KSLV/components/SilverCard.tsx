@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody, Button, ArrowForwardIcon } from 'kebabfinance-uikit'
+import { usePriceSilver } from '../../../state/hooks'
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -8,7 +9,6 @@ const StyledCard = styled(Card)`
   height: 182px;
   background-color: rgba(0, 0, 0, 0.7);
   margin-top: 25px;
-  margin-bottom: 150px;
   box-shadow: none;
   border-radius: 40px;
 
@@ -47,17 +47,25 @@ const StyledButton = styled(Button)`
 `
 
 const SilverCard = () => {
+  const silverPriceGram = usePriceSilver().toNumber().toFixed(3)
+  const silverPriceOz = (31.1035 * (usePriceSilver().toNumber())).toFixed(2)
   return (
     <StyledCard>
       <StyledCardBody>
         <CardTitle>Silver</CardTitle>
         <Value>
-          <Price>$22.57</Price>
-          <Blurb>Silver gr Buy Price</Blurb>
+          <Price>${silverPriceGram}</Price>
+          <Blurb>1 gram</Blurb>
         </Value>
-        <StyledButton variant="secondary" size="sm" endIcon={<ArrowForwardIcon color="currentColor" />}>
-          Trade Silver
-        </StyledButton>
+        <Value>
+          <Price>${silverPriceOz}</Price>
+          <Blurb>1 troy oz</Blurb>
+        </Value>
+        <a href="https://swap.kebabfinance.com/#/swap?exactAmount=31.1&exactField=output&inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x58b8e295fc5b705bcbb48c5978b2b389332e0414">
+          <StyledButton variant="secondary" size="sm" endIcon={<ArrowForwardIcon color="currentColor" />}>
+            Trade Silver
+          </StyledButton>
+        </a>
       </StyledCardBody>
     </StyledCard>
   )

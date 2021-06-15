@@ -1,6 +1,6 @@
 import { PoolConfig, QuoteToken, PoolCategory } from './types'
 
-export const GET_POOLS_LIST_URL = 'https://run.mocky.io/v3/e54c1ca3-b087-4143-8457-919dc0630cff'
+export const GET_POOLS_LIST_URL = 'https://lists.kebabfinance.com/pools-test.json'
 
 const pools: PoolConfig[] = [
   {
@@ -111,24 +111,24 @@ const pools: PoolConfig[] = [
   //   isActive: false,
   //   tokenDecimals: 18,
   // },
-  {
-    sousId: 4,
-    tokenName: 'BNB',
-    stakingTokenName: QuoteToken.KEBAB,
-    stakingTokenAddress: '0x7979F6C54ebA05E18Ded44C4F986F49a5De551c2',
-    contractAddress: {
-      97: '',
-      56: '0x931A250b93249F58373dd3D9834Cda3684eE7dAF',
-    },
-    poolCategory: PoolCategory.CORE,
-    projectLink: 'https://www.binance.org',
-    harvest: true,
-    tokenPerBlock: '0.00003470',
-    sortOrder: 3,
-    isFinished: true,
-    isActive: false,
-    tokenDecimals: 18,
-  },
+  // {
+  //   sousId: 4,
+  //   tokenName: 'BNB',
+  //   stakingTokenName: QuoteToken.KEBAB,
+  //   stakingTokenAddress: '0x7979F6C54ebA05E18Ded44C4F986F49a5De551c2',
+  //   contractAddress: {
+  //     97: '',
+  //     56: '0x931A250b93249F58373dd3D9834Cda3684eE7dAF',
+  //   },
+  //   poolCategory: PoolCategory.CORE,
+  //   projectLink: 'https://www.binance.org',
+  //   harvest: true,
+  //   tokenPerBlock: '0.00003470',
+  //   sortOrder: 3,
+  //   isFinished: true,
+  //   isActive: false,
+  //   tokenDecimals: 18,
+  // },
   {
     sousId: 6,
     tokenName: 'BNB',
@@ -147,6 +147,42 @@ const pools: PoolConfig[] = [
     isActive: true,
     tokenDecimals: 18,
   },
+  {
+    sousId: 8,
+    tokenName: 'BNB',
+    stakingTokenName: QuoteToken.KEBAB,
+    stakingTokenAddress: '0x7979F6C54ebA05E18Ded44C4F986F49a5De551c2',
+    contractAddress: {
+      97: '',
+      56: '0xfDe0C0F8De7563cBcf74357204b446eF325EAa60',
+    },
+    poolCategory: PoolCategory.CORE,
+    projectLink: 'https://www.binance.org',
+    harvest: true,
+    tokenPerBlock: '0.00002470',
+    sortOrder: 3,
+    isFinished: false,
+    isActive: true,
+    tokenDecimals: 18,
+  },
+  {
+    sousId: 9,
+    tokenName: 'NAUT',
+    stakingTokenName: QuoteToken.KEBAB,
+    stakingTokenAddress: '0x7979F6C54ebA05E18Ded44C4F986F49a5De551c2',
+    contractAddress: {
+      97: '',
+      56: '0x21cda390673aa780a029ab785728a2b01c0dc8c1',
+    },
+    poolCategory: PoolCategory.CORE,
+    projectLink: 'https://astronaut.to',
+    harvest: true,
+    tokenPerBlock: '0.00099206',
+    sortOrder: 3,
+    isFinished: false,
+    isActive: true,
+    tokenDecimals: 8,
+  }
 ]
 
 export default pools

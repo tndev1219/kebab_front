@@ -39,6 +39,13 @@ const config: MenuEntry[] = [
     backgroundColor: '#FDE9D1',
   },
   {
+    label: 'Metals',
+    icon: 'KSLVIcon',
+    href: '/metals',
+    color: '#e8c99b',
+    backgroundColor: '#fff',
+  },
+  {
     label: 'IFO',
     icon: 'IfoIcon',
     href: '/ifo',
@@ -51,13 +58,6 @@ const config: MenuEntry[] = [
     href: '/dashboard',
     color: '#7A23BE',
     backgroundColor: '#E4D3F2',
-  },
-  {
-    label: 'KSLV',
-    icon: 'KSLVIcon',
-    href: '/kslv',
-    color: '#7C7C7C',
-    backgroundColor: '#E5E5E5',
   },
   {
     label: 'Info',
@@ -88,8 +88,8 @@ const config: MenuEntry[] = [
     icon: 'MoreIcon',
     items: [
       {
-        label: 'Governance',
-        href: 'https://gov.kebabfinance.com',
+        label: 'Documentation',
+        href: 'https://docs.kebabfinance.com',
       },
       {
         label: 'Github',
@@ -97,7 +97,7 @@ const config: MenuEntry[] = [
       },
       {
         label: 'Blog',
-        href: 'https://kebabfinance1.medium.com',
+        href: 'https://kebabfinance.medium.com',
       },
     ],
     color: '#DCAB2F',

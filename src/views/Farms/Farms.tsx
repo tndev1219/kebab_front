@@ -71,7 +71,6 @@ const Farms: React.FC = () => {
           // all the /BTCB pairs
           apy = kebabPriceUsd.times(kebabRewardPerYear).div(farm.lpTotalInQuoteToken).div(btcbPriceUsd)
         } else if (farm.quoteTokenSymbol === QuoteToken.KEBAB) {
-          // the syrup pool
           apy = kebabRewardPerYear.div(farm.lpTotalInQuoteToken)
         } else if (farm.quoteTokenSymbol === QuoteToken.BNB) {
           // KEBAB/BNB

@@ -62,7 +62,8 @@ const KSLV = () => {
     <Page>
       <Container>
         <Hero />
-        <Title as="h1">Metal Token</Title>
+        <Title as="h1">Kebab Metals</Title>
+        <SilverCard />
         <BackedCard />
         <DefiCardWrapper>
           <CompCard />
@@ -73,8 +74,8 @@ const KSLV = () => {
           <GraphCard />
         </FeeCardWrapper>
         <AccessCard />
-        <GoldCard />
-        <SilverCard />
+        {/* <GoldCard /> */}
+        {/* <SilverCard /> */}
       </Container>
     </Page>
   )

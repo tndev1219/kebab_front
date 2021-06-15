@@ -1,7 +1,7 @@
 import contracts from './contracts'
 import { FarmConfig, QuoteToken } from './types'
 
-export const GET_FARMS_LIST_URL = 'https://run.mocky.io/v3/f3f2c66d-65b5-4a1c-a7aa-9d8ee8710f42'
+export const GET_FARMS_LIST_URL = 'https://lists.kebabfinance.com/farms-test.json'
 
 const farms: FarmConfig[] = [
   {
@@ -69,6 +69,23 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
     multiplier: '12X',
+  },
+  {
+    pid: 17,
+    lpSymbol: 'KSLV-KEBAB LP',
+    lpAddresses: {
+      97: '0x4cb4610b3a201eec3f272b312dacc2ef2c2cbc10',
+      56: '0x4cb4610b3a201eec3f272b312dacc2ef2c2cbc10',
+    },
+    tokenSymbol: 'KEBAB',
+    tokenAddresses: {
+      97: '0x58b8e295fc5b705bcbb48c5978b2b389332e0414',
+      56: '0x58b8e295fc5b705bcbb48c5978b2b389332e0414',
+    },
+    risk: 2,
+    quoteTokenSymbol: QuoteToken.KEBAB,
+    quoteTokenAdresses: contracts.cake,
+    multiplier: '5X',
   },
   {
     pid: 4,
@@ -169,7 +186,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-    multiplier: '2X',
+    multiplier: '0X',
     risk: 3,
   },
   {
@@ -220,7 +237,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-    multiplier: '1X',
+    multiplier: '0X',
     risk: 4,
   },
   {
@@ -254,7 +271,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-    multiplier: '1X',
+    multiplier: '0X',
     risk: 1,
   },
   {
@@ -271,7 +288,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-    multiplier: '1X',
+    multiplier: '0X',
     risk: 1,
   },
   {
@@ -288,7 +305,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-    multiplier: '1X',
+    multiplier: '0X',
     risk: 1,
   },
   // {

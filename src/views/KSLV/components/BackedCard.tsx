@@ -44,7 +44,7 @@ const BackedCard = () => {
         <Blurb>
           Our silver token is backed by a physical silver reserve in our secure vault. Owning KSLV would be as good as
           owning the underlying silver asset. Why stake USDT and other stable coins when you can do the same with a
-          fully-backed tokenized appreciating asset.
+          fully-backed tokenized appreciating asset. You can <a href="https://docs.kebabfinance.com/kebab-documentation/silver/why">swap interchangeably</a> between crypto and physical bullion at any time.
         </Blurb>
       </StyledCardBody>
     </StyledCard>

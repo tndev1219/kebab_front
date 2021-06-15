@@ -156,6 +156,16 @@ export const usePriceBtcbBusd = (): BigNumber => {
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
+export const usePriceSilver = (): BigNumber => {
+  const pid = 17 // KSLV-KEBAB LP
+  const farm = useFarmFromPid(pid)
+  const kebabPrice = usePriceCakeBusd()
+  if (!farm || !farm.tokenPriceVsQuote)
+    return ZERO
+  const price = new BigNumber(farm.tokenPriceVsQuote).times(kebabPrice)
+  return price
+}
+
 export const usePriceBusd = (symbol: string): BigNumber => {
   const farm = useFarmFromSymbol(symbol)
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
