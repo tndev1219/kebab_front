@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'GilroySemiBold';
     src: url(/fonts/Gilroy-SemiBold.ttf);
   }
+  @font-face {
+    font-family: 'GilroyExtraBold';
+    src: url(/fonts/Gilroy-ExtraBold.ttf);
+  }
   * {
     font-family: 'GilroyRegular', sans-serif;
   }

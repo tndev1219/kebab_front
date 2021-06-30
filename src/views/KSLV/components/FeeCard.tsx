@@ -4,31 +4,45 @@ import { Heading, Card, CardBody } from 'kebabfinance-uikit'
 
 const StyledCard = styled(Card)`
   display: flex;
-  align-items: center;
   background-color: ${({ theme }) => theme.colors.cardBackground3};
   box-shadow: none;
-  height: 423px;
+  height: 280px;
   margin: auto;
   border-radius: 40px;
   width: 100%;
 
   ${({ theme }) => theme.mediaQueries.sm} {
+    height: 423px;
     max-width: 370px;
+    align-items: center;
   }
 `
 const StyledCardBody = styled(CardBody)`
-  padding: 40px;
+  padding: 42px 32px 0px 32px;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 32px;
+  }
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 34px;
   color: #34c759;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 48px;
+    font-family: GilroyExtraBold;
+  }
 `
 const Blurb = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 14px;
+  line-height: 16px;
   color: ${({ theme }) => theme.colors.kslvText};
   margin-top: 6px;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `
 
 const FeeCard = () => {

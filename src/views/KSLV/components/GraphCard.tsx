@@ -8,12 +8,13 @@ const StyledCard = styled(Card)`
   align-items: center;
   background-color: #252836;
   box-shadow: none;
-  height: 423px;
+  height: 404px;
   margin: auto;
   border-radius: 40px;
   width: 100%;
 
   ${({ theme }) => theme.mediaQueries.sm} {
+    height: 423px;
     max-width: 370px;
   }
 `
@@ -23,9 +24,14 @@ const StyledCardBody = styled(CardBody)`
   height: 100%;
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 32px;
+  font-size: 24px;
   text-align: center;
-  color: #34c759;
+  color: #32D74B;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 34px;
+    font-family: GilroyExtraBold;
+  }
 `
 const data = [
   { name: 'Y0', uv: 10000 },
