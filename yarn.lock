@@ -10186,10 +10186,10 @@ jss@10.6.0, jss@^10.5.1:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-kebabfinance-uikit@^0.8.21:
-  version "0.8.21"
-  resolved "https://registry.yarnpkg.com/kebabfinance-uikit/-/kebabfinance-uikit-0.8.21.tgz#55dbf015197ae8b67cb4945482226611d7471c15"
-  integrity sha512-lYl/Zua7gex9w6K6Dm/63qeOTCJQI/7CjjJJoEO4b4YS02m7ExW+jLeK7pdPXmz0A6BOvvdfuIWe18O7hOXgrw==
+kebabfinance-uikit@0.8.22:
+  version "0.8.22"
+  resolved "https://registry.yarnpkg.com/kebabfinance-uikit/-/kebabfinance-uikit-0.8.22.tgz#9ed26f12727c17d59f2a72b76ca3cce091d9a1bf"
+  integrity sha512-w2CQ5QHovcnpzJEYPbouiM+EDvpLe8Jc9O7mEUFxwI7hgPKoW98o8avAx9P27ZKZ9db7NZwsVp/WHSKf43EnOQ==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"

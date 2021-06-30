@@ -15,21 +15,26 @@ import GoldCard from './components/GoldCard'
 import SilverCard from './components/SilverCard'
 
 const Title = styled(Heading)`
-  font-family: 'GilroyMedium';
-  font-size: 64px;
+  font-family: 'GilroyExtraBold';
+  font-size: 34px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.kslvText};
   margin-top: -20px;
   text-align: center;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 60px;
+  }
 `
 const DefiCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-gap: 16px;
-  margin-top: 50px;
+  grid-gap: 24px;
+  margin-top: 20px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     display: grid;
+    margin-top: 40px;
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -42,11 +47,13 @@ const DefiCardWrapper = styled.div`
 const FeeCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-gap: 16px;
-  margin-top: 24px;
+  grid-gap: 20px;
+  margin-top: 20px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     display: grid;
+    grid-gap: 24px;
+    margin-top: 40px;
     grid-template-columns: repeat(2, 1fr);
   }
 

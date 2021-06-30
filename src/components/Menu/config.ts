@@ -42,8 +42,8 @@ const config: MenuEntry[] = [
     label: 'Metals',
     icon: 'KSLVIcon',
     href: '/metals',
-    color: '#e8c99b',
-    backgroundColor: '#fff',
+    color: '#E8AC7D',
+    backgroundColor: 'rgba(232, 172, 125, 0.2)',
   },
   {
     label: 'IFO',

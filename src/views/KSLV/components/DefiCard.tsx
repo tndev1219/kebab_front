@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Heading, Card, CardBody } from 'kebabfinance-uikit'
 
 const StyledCard = styled(Card)`
-  display: flex;
+  display: none;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.cardBackground3};
   box-shadow: none;
@@ -11,22 +11,23 @@ const StyledCard = styled(Card)`
   margin: auto;
   border-radius: 40px;
   width: 100%;
-
+  
   ${({ theme }) => theme.mediaQueries.sm} {
+    display: flex;
     max-width: 370px;
   }
 `
 const StyledCardBody = styled(CardBody)`
-  padding: 40px;
+  padding: 32px;
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 47px;
   color: #af52de;
+  font-family: 'GilroyExtraBold';
 `
 const Blurb = styled(Heading).attrs({ size: 'lg' })`
   font-size: 16px;
-  line-height: 25px;
+  line-height: 24px;
   color: ${({ theme }) => theme.colors.kslvText};
   margin-top: 6px;
 `

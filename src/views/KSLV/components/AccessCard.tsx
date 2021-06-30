@@ -4,38 +4,52 @@ import { Heading, Card, CardBody } from 'kebabfinance-uikit'
 
 const StyledCard = styled(Card)`
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 424px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 480px;
   background-color: ${({ theme }) => theme.colors.cardBackground3};
-  margin-top: 25px;
+  margin-top: 20px;
   box-shadow: none;
   border-radius: 40px;
   margin-bottom: 150px;
 
   background-image: url('/images/kslv/access.png');
   background-repeat: no-repeat;
-  background-position: center left;
-  background-size: cover;
+  background-position: bottom left;
+  background-size: 130%;
 
-  ${({ theme }) => theme.mediaQueries.md} {
+  ${({ theme }) => theme.mediaQueries.sm} {
+    align-items: center;
+    justify-content: flex-end;
+    height: 424px;
+    margin-top: 40px;
     background-size: contain;
   }
 `
 const StyledCardBody = styled(CardBody)`
-  padding-right: 40px;
-  padding-left: 40px;
+  padding: 42px 24px 42px 32px;
 `
 const CardTitle = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 48px;
+  font-size: 34px;
   color: #007aff;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 48px;
+    font-family: GilroyExtraBold;
+  }
 `
 const Blurb = styled(Heading).attrs({ size: 'lg' })`
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 16px;
   color: ${({ theme }) => theme.colors.kslvText};
   margin-top: 6px;
-  width: 320px;
-  line-height: 25px;
+  width: 100%;
+  
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 320px;
+    font-size: 16px;
+    line-height: 24px;
+  }
 `
 
 const AccessCard = () => {
