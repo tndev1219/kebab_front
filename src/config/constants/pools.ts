@@ -1,6 +1,6 @@
 import { PoolConfig, QuoteToken, PoolCategory } from './types'
 
-export const GET_POOLS_LIST_URL = 'https://lists.kebabfinance.com/pools-test.json'
+export const GET_POOLS_LIST_URL = 'https://lists.kebabfinance.netlify.app/pools-test.json'
 
 const pools: PoolConfig[] = [
   {

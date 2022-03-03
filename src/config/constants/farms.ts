@@ -1,7 +1,7 @@
 import contracts from './contracts'
 import { FarmConfig, QuoteToken } from './types'
 
-export const GET_FARMS_LIST_URL = 'https://lists.kebabfinance.com/farms-test.json'
+export const GET_FARMS_LIST_URL = 'https://lists.kebabfinance.netlify.app/farms-test.json'
 
 const farms: FarmConfig[] = [
   {
